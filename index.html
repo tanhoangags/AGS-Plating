@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGS Precision | Advanced Surface Finishing Solutions</title>
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; scroll-behavior: smooth; }
+        h1, h2, h3, h4 { font-family: 'Roboto', sans-serif; }
+        .breadcrumb-item::after { content: ">"; margin: 0 8px; color: #94a3b8; font-size: 10px; }
+        .breadcrumb-item:last-child::after { content: ""; }
+        .service-card img { transition: transform 0.5s ease; width: 100%; height: 280px; object-fit: cover; }
+        .service-card:hover img { transform: scale(1.05); }
+        .header-shadow { box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .bg-grid { background-image: radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 20px 20px; }
+        .tech-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; }
+        .logo-container img { height: 50px; width: auto; object-fit: contain; }
+        .type-box { border: 1px solid #e2e8f0; padding: 14px; border-radius: 12px; margin-top: 10px; background-color: #ffffff; }
+    </style>
+</head>
+<body class="text-slate-800">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- Safe Icon Component ---
+        const Icon = ({ name, size = 24, className = "" }) => {
+            useEffect(() => { if (window.lucide) window.lucide.createIcons(); }, [name]);
+            return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
+        };
+
+        // --- Master Data ---
+        const servicesData = {
+            anodizing: {
+                title: "Precision Anodizing",
+                image: "olga-kovalski-JuoFl82-w-A-unsplash.jpg",
+                overview: "Anodizing is an electrochemical process that converts the metal surface into a durable, corrosion-resistant finish. At AGS, we specialize in high-precision electrolytic oxidation where the aluminum part serves as the anode, creating a layer fully integrated with the substrate.",
+                typeBoxes: [
+                    { title: "Type I (BSAA/TSAA)", content: "Thin, eco-friendly coating for aerospace. Best for corrosion resistance and paint adhesion with minimal dimensional change." },
+                    { title: "Type II (Sulfuric)", content: "5–20μm. Versatile, decorative finish. Supports vibrant colors. Ideal for consumer electronics." },
+                    { title: "Type III (Hardcoat)", content: "25–100μm. High-density, 400–600HV. Superior wear resistance for industrial machinery." }
+                ],
+                specs: [
+                    { label: "Standard", value: "MIL-A-8625 Type I, II, III" },
+                    { label: "Materials", value: "6061, 7075, 2024, 5052" },
+                    { label: "Thickness", value: "0.5μm to 115μm" },
+                    { label: "Hardness", value: "Up to 700 HV" }
+                ],
+                benefits: ["Superior Wear Resistance", "Excellent Paint Adhesion", "Non-Conductive Layer", "Aesthetic Color Variety", "Non-flaking Integration", "Thermal Management"],
+                focus: ["Aerospace Brackets", "Medical Housings", "Optical Components", "Electronic Heat Sinks", "Defense Hardware", "Robotics Frames"],
+                qc: "Coating thickness verification via Eddy Current and color matching under D65 lighting.",
+                gallery: ["viber_image_2026-03-25_15-33-15-845.jpg", "sandblast anodizing.jpg", "red anodizing 2.jpg", "hard anodizing.jpg"]
+            },
+            alodine: {
+                title: "Alodine / Chemical Film",
+                image: "Alodine.jpg",
+                overview: "Chemical Film coating, also known as Alodine or Iridite, is a chromate conversion process for aluminum. It produces a protective film on the surface that prevents corrosion while maintaining electrical conductivity. This is a significant advantage over anodizing, which is an insulator. At AGS, we utilize both Type I (containing hexavalent chromium) and Type II (trivalent chromium, RoHS compliant). The process involves immersion in a chemical bath that reacts with the aluminum to form an iridescent gold or clear finish. It provides an excellent base for paint adhesion, making it a standard choice for aerospace enclosures and electronic chassis. The coating meets MIL-DTL-5541 standards, providing up to 168 hours of salt spray resistance. It is often used on grounding surfaces and EMI shielding components where low contact resistance is mandatory. Our facility ensures precise immersion timing and bath chemistry monitoring to achieve consistent results for mission-critical parts.",
+                specs: [
+                    { label: "Standard", value: "MIL-DTL-5541 Type I & II" },
+                    { label: "Appearance", value: "Gold or Clear" },
+                    { label: "Compliance", value: "RoHS / REACH" },
+                    { label: "Conductivity", value: "High (Low Resistance)" }
+                ],
+                benefits: ["Electronic Grounding", "Corrosion Barrier", "Conductive Paint Base", "Cost-Effective", "Quick Turnaround", "Low Dimensional Change"],
+                focus: ["EMI/RFI Shielding", "Telecom Housings", "Avionics Chassis", "Grounding Plates", "Radio Equipment", "Tactical Electronics"],
+                qc: "Electrical contact resistance testing and Salt Spray verification (ASTM B117).",
+                gallery: ["viber_image_2026-03-25_14-33-25-741.jpg", "viber_image_2026-03-25_14-33-26-068.jpg", "viber_image_2026-03-25_14-33-25-356.jpg", "Alodine.jpg"]
+            },
+            uhv: {
+                title: "UHV / Precision Cleaning",
+                image: "UHV.jpg",
+                overview: "Ultra-High Vacuum (UHV) cleaning is a specialized multi-stage decontamination process critical for semiconductor, aerospace, and high-energy physics applications. The primary goal is to remove all organic residues, oils, fingerprints, and particles that could cause outgassing or contamination in a vacuum environment. Our process at AGS starts with pre-cleaning, followed by high-intensity ultrasonic baths using specialized detergents and deionized (DI) water. Parts undergo multiple rinse cycles to ensure zero chemical carryover. We perform strict blacklight inspections and water-break-free tests to verify surface purity. Following cleaning, components are baked in controlled ovens to drive off moisture and residual volatile compounds. The final stage involves double-bagging and vacuum-sealing in an ISO Class cleanroom. This ensures the hardware arrives at the customer's site ready for immediate installation into UHV systems without the risk of contaminating sensitive processes.",
+                specs: [
+                    { label: "Environment", value: "ISO Class Cleanroom" },
+                    { label: "Cleaning", value: "Ultrasonic / DI Water" },
+                    { label: "Standard", value: "SEMI / ASTM G93" },
+                    { label: "Verification", value: "RGA / Blacklight" }
+                ],
+                benefits: ["Zero Outgassing", "Particle-Free Surfaces", "Extended Tool Life", "Contamination Control", "Safe for High Vacuum", "Ultra-pure DI rinsing"],
+                focus: ["Semiconductor Tools", "Cryogenic hardware", "Space Flight Parts", "Vacuum Chambers", "Scientific Instruments", "EUV Source Modules"],
+                qc: "Residual Gas Analysis (RGA) and particulate count monitoring in our controlled cleanroom.",
+                gallery: ["l-n-QASO5vwgVco-unsplash.jpg", "john-smith-K4lV6QhJXGA-unsplash.jpg", "angel-xu-y29VOlK-y2I-unsplash.jpg", "UHV.jpg"]
+            },
+            nickel: {
+                title: "Electroless Nickel Plating",
+                image: "elesstroless nickel.jpg",
+                overview: "Electroless Nickel Plating (ENP) is an auto-catalytic chemical process used to deposit a nickel-phosphorus alloy on a metallic substrate. Unlike conventional electroplating, it does not require an external electric current, which means the coating thickness is perfectly uniform across the entire surface of the part, including complex internal geometries, deep blind holes, and sharp edges. At AGS, we provide low, medium, and high phosphorus options to match specific corrosion and hardness requirements. High-phosphorus ENP offers superior chemical resistance, while medium-phosphorus is the industry workhorse. The coating provides exceptional wear resistance and can be heat-treated to achieve hardness levels up to 62 HRC, comparable to hard chrome. This makes it ideal for precision gears, fuel system components, and valves. Our process control includes continuous bath analysis and micro-sectioning to verify thickness and phosphorus content.",
+                specs: [
+                    { label: "Standard", value: "AMS-C-26074 / ASTM B733" },
+                    { label: "Hardness", value: "48 - 62 HRC" },
+                    { label: "Uniformity", value: "±2μm Control" },
+                    { label: "Chemistry", value: "L/M/H Phosphorus" }
+                ],
+                benefits: ["Perfect Uniformity", "Extreme Wear Resistance", "Excellent Solderability", "Corrosion Shielding", "Lubricity Improvement", "Non-Magnetic Options"],
+                focus: ["Injection Molds", "Precision Gears", "Fuel System Parts", "Hydraulic Valves", "Oil & Gas Equipment", "Automotive Sensors"],
+                qc: "Micro-section thickness analysis and Heat Quench adhesion testing.",
+                gallery: ["elesstroless nickel.jpg"]
+            },
+            passivation: {
+                title: "Passivation Service",
+                image: "mastars-4Jdp3ZgC16U-unsplash.jpg",
+                overview: "Passivation is a non-electrolytic process that typically uses nitric or citric acid to remove free iron from the surface of stainless steel. By removing this free iron—which often comes from machining tools or environmental exposure—the process allows the material's natural chromium content to react with oxygen, forming a dense, transparent protective oxide layer. This 'passive' layer is what makes stainless steel truly stainless. Without proper passivation, stainless steel can experience localized pitting or surface rust in demanding environments. At AGS, our passivation processes comply with ASTM A967 and AMS 2700 standards. We handle 300-series and 400-series stainless steels, along with precipitation-hardened (PH) alloys. The treatment is essential for medical surgical instruments to ensure biocompatibility and for aerospace fluid fittings to prevent contamination. Our quality verification includes copper sulfate testing and humidity chamber exposure.",
+                specs: [
+                    { label: "Standard", value: "ASTM A967 / AMS 2700" },
+                    { label: "Chemistry", value: "Nitric or Citric Acid" },
+                    { label: "Materials", value: "300 / 400 PH Stainless" },
+                    { label: "Process", value: "Chemical Immersion" }
+                ],
+                benefits: ["Rust Prevention", "Sanitary Surfaces", "Bio-compatibility", "Long-term Durability", "Chemical Purity", "Improved Aesthetics"],
+                focus: ["Surgical Instruments", "Food Equipment", "Aerospace Fittings", "Pharma Hardware", "Marine Components", "Cleanroom Furniture"],
+                qc: "Copper Sulfate testing and Humidity Chamber verification according to ASTM standards.",
+                gallery: ["mastars-4Jdp3ZgC16U-unsplash.jpg"]
+            },
+            electropolishing: {
+                title: "Precision Electropolishing",
+                image: "electropolishing.jpg",
+                overview: "Precision Electropolishing is often described as 'reverse plating.' It is an electrochemical process that removes a microscopic layer of material from the surface of a metal part, typically stainless steel. By selectively removing metal from the peaks of the surface profile, electropolishing smooths the surface, removes micro-burrs, and eliminates surface cracks or stress points. The result is a mirror-like, high-luster finish that is not only aesthetically pleasing but also ultra-clean. This process significantly enriches the surface with chromium, providing much higher corrosion resistance than standard chemical passivation. For AGS customers in the semiconductor and pharmaceutical industries, electropolishing is mandatory to ensure that gas lines and tanks are free of microscopic crevices where bacteria or particles could hide. It also provides stress relief for precision springs and delicate hardware. We monitor Ra before and after the process.",
+                specs: [
+                    { label: "Standard", value: "ASTM B912 / ISO 15730" },
+                    { label: "Roughness", value: "50% Ra Reduction" },
+                    { label: "Aesthetics", value: "Mirror Finish" },
+                    { label: "Purity", value: "Ultra-Clean Level" }
+                ],
+                benefits: ["Mirror-like Finish", "Stress Relief", "Ultra-Clean Surfaces", "Micro-Deburring", "Passivation Enrichment", "Bacteria Resistance"],
+                focus: ["Semicon Gas Lines", "Pharma Tanks", "Marine Fittings", "Sterile Parts", "Decorative Luxury", "High-Energy Physics"],
+                qc: "Surface roughness (Ra) measurement and microscopic visual inspection.",
+                gallery: ["electropolishing.jpg"]
+            },
+            plating: {
+                title: "Electroplating (Plating)",
+                image: "electroplating.jpg",
+                overview: "Industrial Electroplating is a current-driven process that coats a metal part with a thin layer of another metal, such as Zinc, Nickel, Chrome, or Gold. Each metal offers unique functional benefits: Zinc provides excellent sacrificial corrosion protection for steel; Nickel offers a balance of wear resistance and aesthetics; while Gold is used for its superior electrical conductivity and oxidation resistance in high-end connectors. At AGS, we control the plating thickness to within a few microns to ensure that tight tolerances on threaded parts and mating surfaces are maintained. The process involves a series of electrochemical baths where the part acts as the cathode. Proper surface activation and pre-treatment are the keys to achieving high adhesion strength. We utilize X-Ray Fluorescence (XRF) technology to non-destructively measure plating thickness and ensure compliance with customer specifications. Our plating services are designed for functional durability and surface performance.",
+                specs: [
+                    { label: "Types", value: "Nickel, Zinc, Gold, Tin" },
+                    { label: "Thickness", value: "Controlled Micron" },
+                    { label: "Property", value: "Functional / Decorative" },
+                    { label: "Capacity", value: "Precision Components" }
+                ],
+                benefits: ["Electrical Conductivity", "Corrosion Resistance", "Enhanced Hardness", "Improved Lubricity", "Solderability", "Anti-Galling Property"],
+                focus: ["Connectors", "Fasteners", "Engine Components", "Industrial Hardware", "Power Distribution", "Jewelry/Luxury Goods"],
+                qc: "X-Ray Fluorescence (XRF) and adhesion bend tests.",
+                gallery: ["electroplating.jpg"]
+            },
+            powder: {
+                title: "Powder Coating",
+                image: "powder coating.jpg",
+                overview: "Powder Coating is a high-performance dry finishing process used to apply a protective and decorative layer to metal parts. The process involves spraying finely ground particles of pigment and resin, which are electrostatically charged, onto the surface. The part is then cured in an oven where the powder melts and reacts to form a long-chain polymer finish that is much tougher than liquid paint. This resulting 'shell' is highly resistant to chipping, scratching, chemical exposure, and UV fading. AGS provides a vast range of RAL colors and textures, including matte, glossy, and sand-textured finishes. It is the preferred choice for industrial robotics and automation frames where durability is the top priority. Unlike liquid painting, powder coating is environmentally friendly as it contains no solvents. We perform cross-hatch adhesion tests and impact resistance checks for every batch.",
+                specs: [
+                    { label: "Finishes", value: "Matte, Gloss, Sand" },
+                    { label: "Colors", value: "Full RAL Palette" },
+                    { label: "Durability", value: "High Impact & UV" },
+                    { label: "Standards", value: "ASTM D3359 / ISO 2409" }
+                ],
+                benefits: ["Extreme Durability", "UV & Weather Resistance", "Impact Resistance", "RoHS Compliant", "Cost Efficiency", "Uniform Coverage"],
+                focus: ["Robot Frames", "Automation Housings", "Outdoor Fixtures", "Enclosures", "Warehouse Equipment", "AI Infrastructure"],
+                qc: "Cross-hatch adhesion testing and film thickness measurement.",
+                gallery: ["powder coating.jpg"]
+            }
+        };
+
+        // --- Sub-Component: Quote Form ---
+        const QuoteForm = ({ title, onNavigate }) => (
+            <div id="quote-section" className="bg-white p-10 rounded-[2.5rem] shadow-2xl border border-slate-100 mt-20 fade-in text-left">
+                <div className="flex items-center gap-4 mb-10">
+                    <div className="bg-red-600 p-4 rounded-2xl text-white shadow-lg">
+                        <Icon name="mail" size={28} />
+                    </div>
+                    <div>
+                        <h3 className="text-2xl font-black uppercase tracking-tight">Quick Quote: {title || "Request"}</h3>
+                        <p className="text-slate-400 text-xs font-bold tracking-widest uppercase">Attach CAD/PDF for priority response</p>
+                    </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-8">
+                    <div className="space-y-6">
+                        <input type="text" placeholder="Full Name" className="w-full p-4 bg-slate-50 rounded-xl ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                        <input type="email" placeholder="Company Email" className="w-full p-4 bg-slate-50 rounded-xl ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                        <input type="text" placeholder="Phone / Whatsapp" className="w-full p-4 bg-slate-50 rounded-xl ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                    </div>
+                    <div className="space-y-6">
+                        <div className="relative group">
+                            <input type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" multiple />
+                            <div className="p-10 border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center bg-slate-50 group-hover:border-blue-400 transition-all">
+                                <Icon name="file-up" className="text-slate-300 mb-2" size={40} />
+                                <span className="text-[11px] font-black text-slate-400 uppercase tracking-widest text-center">Update Documents (CAD/PDF)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="md:col-span-2">
+                        <textarea rows="4" placeholder="Project Requirements (Material, Qty, Specs...)" className="w-full p-5 bg-slate-50 rounded-2xl ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all"></textarea>
+                    </div>
+                </div>
+                <button className="w-full mt-10 py-5 bg-[#0f172a] text-white rounded-2xl font-black uppercase tracking-widest hover:bg-red-600 shadow-xl transition-all flex items-center justify-center gap-3">
+                    Submit Request <Icon name="arrow-right" size={20} />
+                </button>
+                {onNavigate && <button onClick={() => onNavigate('home')} className="mt-8 text-[10px] font-black uppercase text-slate-300 hover:text-slate-600 tracking-widest w-full text-center">Back home</button>}
+            </div>
+        );
+
+        // --- View: Detail Page ---
+        const DetailView = ({ id, onNavigate }) => {
+            const data = servicesData[id];
+            if (!data) return null;
+
+            return (
+                <div className="fade-in">
+                    <div className="bg-slate-50 border-b border-slate-200 text-left">
+                        <div className="max-w-7xl mx-auto px-6 py-12">
+                            <nav className="flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">
+                                <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('home'); }} className="breadcrumb-item hover:text-blue-600 transition-colors">Home</a>
+                                <span className="breadcrumb-item">Service</span>
+                                <span className="breadcrumb-item text-slate-900 uppercase font-black tracking-widest">{data.title}</span>
+                            </nav>
+                            <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight uppercase leading-none">{data.title}</h1>
+                        </div>
+                    </div>
+
+                    <div className="max-w-7xl mx-auto px-6 py-20 space-y-24">
+                        {/* Sections 1, 2, 5 */}
+                        <div className="grid lg:grid-cols-2 gap-20 items-start text-left text-justify">
+                            <div className="space-y-8 text-left">
+                                <h2 className="text-2xl font-black text-slate-900 border-l-4 border-blue-600 pl-4 uppercase tracking-tighter">Technology Overview</h2>
+                                <p className="text-base text-slate-600 leading-relaxed whitespace-pre-line text-justify">{data.overview}</p>
+                                
+                                {id === 'anodizing' && data.typeBoxes && (
+                                    <div className="mt-6 space-y-3">
+                                        {data.typeBoxes.map((box, idx) => (
+                                            <div key={idx} className="type-box">
+                                                <p className="text-slate-900 font-black uppercase tracking-widest text-[11px] mb-1">{box.title}</p>
+                                                <p className="text-slate-500 text-xs leading-relaxed">{box.content}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                            <div className="space-y-6">
+                                <h2 className="text-2xl font-black text-slate-900 border-l-4 border-blue-600 pl-4 uppercase tracking-tighter">Specifications & Quality</h2>
+                                <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                                    <table className="w-full text-xs text-left tech-table">
+                                        <tbody>
+                                            {data.specs.map((row, i) => (
+                                                <tr key={i}>
+                                                    <td className="font-bold bg-slate-50 w-1/3 uppercase text-[9px] text-slate-400 tracking-widest">{row.label}</td>
+                                                    <td className="text-blue-600 font-bold">{row.value}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div className="p-6 bg-blue-50 rounded-2xl border border-blue-100 flex items-center gap-4">
+                                    <Icon name="award" className="text-blue-600 shrink-0" size={28} />
+                                    <p className="text-[10px] font-black text-blue-800 uppercase tracking-widest leading-relaxed text-left">AS9100D & ISO 9001 Compliance</p>
+                                </div>
+                                <div className="p-6 bg-slate-100 rounded-2xl border border-slate-200 flex items-start gap-4">
+                                    <Icon name="shield-check" className="text-slate-500 shrink-0 mt-1" size={28} />
+                                    <div className="text-left">
+                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">QC Process</p>
+                                        <p className="text-[11px] font-bold text-slate-600 italic leading-relaxed uppercase">"{data.qc}"</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Sections 3 & 4 (Smaller Frames) */}
+                        <div className="grid md:grid-cols-2 gap-10 text-left">
+                            <div className="bg-[#0f172a] text-white p-10 rounded-[2.5rem] shadow-xl relative overflow-hidden">
+                                <div className="absolute -top-6 -right-6 opacity-5"><Icon name="shield" size={150}/></div>
+                                <h2 className="text-xl font-black uppercase mb-8 text-blue-400 tracking-widest">Superior Benefits</h2>
+                                <ul className="space-y-4">
+                                    {data.benefits.map((b, i) => (
+                                        <li key={i} className="flex gap-3 items-center font-medium text-sm">
+                                            <Icon name="check-circle-2" size={16} className="text-blue-500 shrink-0"/>
+                                            {b}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className="p-10 bg-white rounded-[2.5rem] border border-slate-200 shadow-sm">
+                                <h2 className="text-xl font-black uppercase mb-8 text-slate-900 tracking-widest">Industry Focus</h2>
+                                <div className="grid grid-cols-2 gap-3">
+                                    {data.focus.map((item, i) => (
+                                        <div key={i} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl font-bold text-[11px] text-slate-600 border border-slate-100 uppercase tracking-tight">
+                                            <div className="w-2 h-2 bg-blue-600 rounded-full shrink-0"></div>
+                                            {item}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Section 6 (Gallery) */}
+                        <div className="space-y-10">
+                            <h2 className="text-2xl font-black text-slate-900 text-center uppercase tracking-tighter">Gallery & Case Studies</h2>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                {data.gallery.map((img, i) => (
+                                    <div key={i} className="overflow-hidden rounded-2xl h-56 border border-slate-200 shadow group">
+                                        <img src={img} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" alt={data.title} />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <QuoteForm title={data.title} onNavigate={onNavigate} />
+                    </div>
+                </div>
+            );
+        };
+
+        // --- View: Main ListView ---
+        const MainListView = ({ onNavigate }) => (
+            <div className="fade-in">
+                <div className="bg-slate-50 border-b border-slate-200 text-left">
+                    <div className="max-w-7xl mx-auto px-6 py-14">
+                        <nav className="flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">
+                            <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('home'); }} className="breadcrumb-item hover:text-blue-600 transition-colors">Home</a>
+                            <span className="breadcrumb-item text-slate-900 font-bold uppercase">Service</span>
+                        </nav>
+                        <h1 className="text-5xl font-black text-slate-900 tracking-tight uppercase leading-none">Finishing service</h1>
+                    </div>
+                </div>
+
+                <section className="max-w-7xl mx-auto px-6 py-20">
+                    <div className="bg-white p-12 md:p-16 rounded-[3rem] border border-slate-100 shadow-sm leading-relaxed text-slate-600 text-xl text-justify bg-grid relative overflow-hidden">
+                        <div className="relative z-10">
+                            <p className="mb-6 leading-relaxed font-medium">In addition to high precision prototype machining technology, <strong>AGS</strong> also has rich experience in finishing service. With the support of our internal laboratories or partner suppliers, we can complete various finishing services to meet your visual or functional requirements.</p>
+                            <p className="mb-6 leading-relaxed">Finishing service is a process used to change the prototype surface to give it a unique or desired appearance or function. Different technologies are used to improve appearance, adhesion, weldability, corrosion resistance, hardness, conductivity and other properties.</p>
+                            <p>Regardless of the processing method, <strong>AGS</strong> can provide high quality finishing service for your prototype. We have skilled experts to complete the task, ensuring your prototype machining quality is exceptionally high.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="max-w-7xl mx-auto px-6 py-12 text-left">
+                    <div className="grid md:grid-cols-2 gap-x-12 gap-y-24">
+                        {Object.keys(servicesData).map((key) => (
+                            <div key={key} className="service-card flex flex-col gap-8 cursor-pointer group" onClick={() => onNavigate(key)}>
+                                <div className="overflow-hidden rounded-[2rem] shadow-xl border border-slate-200 relative">
+                                    <img src={servicesData[key].image} alt={servicesData[key].title} />
+                                    <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/40 transition-all flex items-center justify-center text-center">
+                                        <div className="bg-white text-blue-900 px-8 py-4 rounded-full font-black uppercase text-[11px] tracking-[0.2em] opacity-0 group-hover:opacity-100 transform translate-y-6 group-hover:translate-y-0 transition-all shadow-xl">View Details & Specs</div>
+                                    </div>
+                                </div>
+                                <div className="text-left px-4 md:px-0">
+                                    <h2 className="text-3xl font-black text-slate-900 mb-4 text-blue-700 underline decoration-blue-200 decoration-4 underline-offset-8 group-hover:text-blue-500 transition-colors uppercase tracking-tighter leading-tight">{servicesData[key].title}</h2>
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6 italic">Spec: {servicesData[key].specs[0].value}</p>
+                                    <p className="text-sm leading-relaxed text-slate-600 line-clamp-3 text-justify">{servicesData[key].overview}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <section id="standards" className="bg-slate-900 text-white py-32 mt-32">
+                    <div className="max-w-6xl mx-auto px-6 text-center">
+                        <h2 className="text-4xl font-black mb-20 uppercase tracking-tighter">Surface Finishing Selection Guide</h2>
+                        <div className="overflow-x-auto rounded-[3rem] border border-white/10 shadow-2xl">
+                            <table className="w-full text-left text-sm">
+                                <thead>
+                                    <tr className="bg-white/5 text-[11px] uppercase font-black tracking-widest text-blue-400 border-b border-white/10">
+                                        <th className="p-8">Material Group</th>
+                                        <th className="p-8">Recommended Treatment</th>
+                                        <th className="p-8">Industry Compliance (Click for Quote)</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-white/5 font-bold uppercase tracking-tighter text-[12px]">
+                                    {[
+                                        ["Aluminum Alloys", "Anodizing, Alodining, Powder Coating", "MIL-A-8625 / MIL-DTL-5541"],
+                                        ["Stainless Steel", "Passivation, Electropolishing, Plating", "ASTM A967 / ASTM B912"],
+                                        ["Carbon & Alloy Steels", "Electroless Nickel, Plating, Powder Coating", "AMS-C-26074 / ASTM B733"],
+                                        ["Soft Metals (Brass, Copper)", "Plating (Nickel, Gold), Passivation", "ASTM B152 / ASTM B36"],
+                                        ["Titanium", "Anodizing (Color/Hard), Electropolishing", "AMS 2487 / AMS 2488"],
+                                        ["Engineering Plastics", "Vapor Polishing, Painting", "RoHS / REACH / FDA"]
+                                    ].map((row, i) => (
+                                        <tr key={i} className="hover:bg-white/5 transition-colors group text-left">
+                                            <td className="p-8 text-white">{row[0]}</td>
+                                            <td className="p-8 text-slate-400">{row[1]}</td>
+                                            <td className="p-8 text-blue-400 cursor-pointer hover:underline group-hover:text-blue-300" onClick={() => onNavigate('quote')}>{row[2]}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        );
+
+        // --- Main Application ---
+        const App = () => {
+            const [currentPage, setCurrentPage] = useState('home');
+
+            useEffect(() => { if (window.lucide) window.lucide.createIcons(); }, [currentPage]);
+
+            const handleNavigate = (page) => {
+                setCurrentPage(page);
+                window.scrollTo(0, 0);
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <header className="bg-white header-shadow sticky top-0 z-50">
+                        <div className="bg-[#0f172a] text-white text-[10px] md:text-[11px] py-2 px-6 flex justify-between items-center font-bold uppercase tracking-widest">
+                            <div className="flex gap-4 md:gap-6">
+                                <span className="flex items-center gap-2 shrink-0 tracking-widest leading-none">TEL: +84 274 3768 492</span>
+                                <span className="hidden md:flex items-center gap-2 tracking-widest leading-none">EMAIL: sales@agsvn.com</span>
+                            </div>
+                            <div className="hidden lg:block italic text-blue-400 tracking-widest uppercase">"Your Satisfaction, Our Motto"</div>
+                        </div>
+                        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+                            <div className="logo-container">
+                                <button onClick={() => handleNavigate('home')} className="focus:outline-none hover:opacity-80 transition-opacity">
+                                    <img src="Screenshot 2026-03-23 131218.png" alt="AGS Precision Machining Logo" />
+                                </button>
+                            </div>
+                            <nav className="hidden lg:flex items-center gap-10 text-[12px] font-black uppercase tracking-[0.15em] text-slate-600">
+                                <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="hover:text-blue-600 transition-colors uppercase">Home</a>
+                                <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-blue-600 border-b-2 border-blue-600 pb-1 uppercase font-black">Service</a>
+                                <a href="#" className="hover:text-blue-600 transition-colors uppercase">Capability</a>
+                                <a href="#" className="hover:text-blue-600 transition-colors uppercase">Industries</a>
+                                <button onClick={() => handleNavigate('quote')} className="bg-red-600 text-white px-7 py-3 rounded-xl hover:bg-red-700 shadow-xl shadow-red-100 transition-all uppercase text-[11px] font-black tracking-widest">Request Quote</button>
+                            </nav>
+                        </div>
+                    </header>
+
+                    <main className="flex-grow">
+                        {currentPage === 'home' && <MainListView onNavigate={handleNavigate} />}
+                        {currentPage === 'quote' && <div className="max-w-5xl mx-auto px-6 py-20"><QuoteForm onNavigate={handleNavigate} /></div>}
+                        {servicesData[currentPage] && <DetailView id={currentPage} onNavigate={handleNavigate} />}
+                    </main>
+
+                    <footer className="bg-white border-t border-slate-200 pt-24 pb-12">
+                        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-16 mb-24 text-left">
+                            <div className="space-y-8">
+                                <div className="logo-container">
+                                    <img src="Screenshot 2026-03-23 131218.png" alt="AGS Footer Logo" />
+                                </div>
+                                <p className="text-[10px] text-slate-400 leading-relaxed uppercase font-black tracking-[0.3em]">Alliance Global Services Co., Ltd</p>
+                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Leading precision machining and certified surface finishing facility based in Vietnam since 2005.</p>
+                            </div>
+                            <div>
+                                <h4 className="text-[11px] font-black uppercase tracking-[0.3em] text-blue-600 mb-8 uppercase">Services</h4>
+                                <ul className="text-[13px] space-y-4 text-slate-500 font-bold uppercase tracking-widest">
+                                    <li><a href="#" className="hover:text-blue-600 transition-colors uppercase tracking-widest">CNC Machining</a></li>
+                                    <li><a href="#" className="hover:text-blue-600 transition-colors uppercase tracking-widest">Surface Finishing</a></li>
+                                    <li><a href="#" className="hover:text-blue-600 transition-colors uppercase tracking-widest">UHV Cleaning</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className="text-[11px] font-black uppercase tracking-[0.3em] text-blue-600 mb-8 uppercase">Compliance</h4>
+                                <ul className="text-[13px] space-y-4 text-slate-500 font-bold uppercase tracking-widest">
+                                    <li>AS9100D Certified</li>
+                                    <li>ISO 9001:2015</li>
+                                    <li>RoHS / REACH</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className="text-[11px] font-black uppercase tracking-[0.3em] text-blue-600 mb-8 uppercase">Contact</h4>
+                                <div className="text-[13px] text-slate-500 space-y-4 font-bold uppercase tracking-tighter leading-relaxed">
+                                    <p className="flex gap-3 text-left"><Icon name="map-pin" className="text-blue-600 shrink-0" size={18}/> Lot B, 20th Street, IP Song Than 2, Binh Duong, VN</p>
+                                    <p className="flex gap-3 text-left"><Icon name="mail" className="text-blue-600 shrink-0" size={18}/> sales@agsvn.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="max-w-7xl mx-auto border-t border-slate-100 pt-10 px-6 text-center text-[10px] font-black uppercase tracking-[0.4em] text-slate-300">
+                            <span>© 2026 AGS Co., Ltd. All Rights Reserved.</span>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
