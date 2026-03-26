@@ -51,13 +51,13 @@
                 overview: "Anodizing is an electrochemical process that converts the metal surface into a durable, corrosion-resistant finish. At AGS, we specialize in high-precision electrolytic oxidation where the aluminum part serves as the anode, creating a layer fully integrated with the substrate.",
                 typeBoxes: [
                     { title: "Type I (BSAA/TSAA)", content: "Thin, eco-friendly coating for aerospace. Best for corrosion resistance and paint adhesion with minimal dimensional change." },
-                    { title: "Type II (Sulfuric)", content: "5–20μm. Versatile, decorative finish. Supports vibrant colors. Ideal for consumer electronics." },
-                    { title: "Type III (Hardcoat)", content: "25–100μm. High-density, 400–600HV. Superior wear resistance for industrial machinery." }
+                    { title: "Type II (Sulfuric)", content: "Versatile, decorative finish. Supports vibrant colors. Ideal for consumer electronics." },
+                    { title: "Type III (Hardcoat)", content: "High-density, superior wear resistance for industrial machinery." }
                 ],
                 specs: [
                     { label: "Standard", value: "MIL-A-8625 Type I, II, III" },
-                    { label: "Materials", value: "6061, 7075, 2024, 5052" },
-                    { label: "Thickness", value: "0.5μm to 115μm" },
+                    { label: "Materials", value: "6061, 7075, 2024, 5052 Alloys" },
+                    { label: "Thickness", value: "0.5μm to 115μm (Customizable)" },
                     { label: "Hardness", value: "Up to 700 HV" }
                 ],
                 benefits: ["Superior Wear Resistance", "Excellent Paint Adhesion", "Non-Conductive Layer", "Aesthetic Color Variety", "Non-flaking Integration", "Thermal Management"],
@@ -181,7 +181,11 @@
                     </div>
                     <div>
                         <h3 className="text-2xl font-black uppercase tracking-tight">Quick Quote: {title || "Request"}</h3>
-                        <p className="text-slate-400 text-xs font-bold tracking-widest uppercase">Attach CAD/PDF for priority response</p>
+                        <p className="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">Attach CAD/PDF for priority response</p>
+                        <div className="flex items-center gap-1.5 text-blue-600">
+                           <Icon name="lock" size={12} />
+                           <span className="text-[10px] font-bold uppercase tracking-wider">All uploads are secure and confidential.</span>
+                        </div>
                     </div>
                 </div>
                 <div className="grid md:grid-cols-2 gap-8">
@@ -229,7 +233,6 @@
                     </div>
 
                     <div className="max-w-7xl mx-auto px-6 py-20 space-y-24">
-                        {/* Sections 1, 2, 5 */}
                         <div className="grid lg:grid-cols-2 gap-20 items-start text-left text-justify">
                             <div className="space-y-8 text-left">
                                 <h2 className="text-2xl font-black text-slate-900 border-l-4 border-blue-600 pl-4 uppercase tracking-tighter">Technology Overview</h2>
@@ -274,11 +277,10 @@
                             </div>
                         </div>
 
-                        {/* Sections 3 & 4 (Smaller Frames) */}
                         <div className="grid md:grid-cols-2 gap-10 text-left">
                             <div className="bg-[#0f172a] text-white p-10 rounded-[2.5rem] shadow-xl relative overflow-hidden">
                                 <div className="absolute -top-6 -right-6 opacity-5"><Icon name="shield" size={150}/></div>
-                                <h2 className="text-xl font-black uppercase mb-8 text-blue-400 tracking-widest">Superior Benefits</h2>
+                                <h2 className="text-xl font-black uppercase mb-8 text-blue-400 tracking-widest text-left">Superior Benefits</h2>
                                 <ul className="space-y-4">
                                     {data.benefits.map((b, i) => (
                                         <li key={i} className="flex gap-3 items-center font-medium text-sm">
@@ -289,7 +291,7 @@
                                 </ul>
                             </div>
                             <div className="p-10 bg-white rounded-[2.5rem] border border-slate-200 shadow-sm">
-                                <h2 className="text-xl font-black uppercase mb-8 text-slate-900 tracking-widest">Industry Focus</h2>
+                                <h2 className="text-xl font-black uppercase mb-8 text-slate-900 tracking-widest text-left">Industry Focus</h2>
                                 <div className="grid grid-cols-2 gap-3">
                                     {data.focus.map((item, i) => (
                                         <div key={i} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl font-bold text-[11px] text-slate-600 border border-slate-100 uppercase tracking-tight">
@@ -301,7 +303,6 @@
                             </div>
                         </div>
 
-                        {/* Section 6 (Gallery) */}
                         <div className="space-y-10">
                             <h2 className="text-2xl font-black text-slate-900 text-center uppercase tracking-tighter">Gallery & Case Studies</h2>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -334,7 +335,7 @@
 
                 <section className="max-w-7xl mx-auto px-6 py-20">
                     <div className="bg-white p-12 md:p-16 rounded-[3rem] border border-slate-100 shadow-sm leading-relaxed text-slate-600 text-xl text-justify bg-grid relative overflow-hidden">
-                        <div className="relative z-10">
+                        <div className="relative z-10 text-justify">
                             <p className="mb-6 leading-relaxed font-medium">In addition to high precision prototype machining technology, <strong>AGS</strong> also has rich experience in finishing service. With the support of our internal laboratories or partner suppliers, we can complete various finishing services to meet your visual or functional requirements.</p>
                             <p className="mb-6 leading-relaxed">Finishing service is a process used to change the prototype surface to give it a unique or desired appearance or function. Different technologies are used to improve appearance, adhesion, weldability, corrosion resistance, hardness, conductivity and other properties.</p>
                             <p>Regardless of the processing method, <strong>AGS</strong> can provide high quality finishing service for your prototype. We have skilled experts to complete the task, ensuring your prototype machining quality is exceptionally high.</p>
@@ -380,8 +381,9 @@
                                         ["Stainless Steel", "Passivation, Electropolishing, Plating", "ASTM A967 / ASTM B912"],
                                         ["Carbon & Alloy Steels", "Electroless Nickel, Plating, Powder Coating", "AMS-C-26074 / ASTM B733"],
                                         ["Soft Metals (Brass, Copper)", "Plating (Nickel, Gold), Passivation", "ASTM B152 / ASTM B36"],
-                                        ["Titanium", "Anodizing (Color/Hard), Electropolishing", "AMS 2487 / AMS 2488"],
-                                        ["Engineering Plastics", "Vapor Polishing, Painting", "RoHS / REACH / FDA"]
+                                        ["Titanium", "Anodizing, Passivation, Electropolishing", "AMS 2487 / AMS 2488"],
+                                        ["Kovar, Molybdenum", "Etching, Passivation, Electropolishing", "AMS 2487 / AMS 2488"],
+                                        ["Engineering Plastics", "Degreasing, Polishing, Painting", "RoHS / REACH / FDA"]
                                     ].map((row, i) => (
                                         <tr key={i} className="hover:bg-white/5 transition-colors group text-left">
                                             <td className="p-8 text-white">{row[0]}</td>
@@ -401,11 +403,23 @@
         const App = () => {
             const [currentPage, setCurrentPage] = useState('home');
 
+            useEffect(() => {
+                const onPopState = (event) => {
+                    const page = event.state?.page || 'home';
+                    handleNavigate(page, true);
+                };
+                window.addEventListener('popstate', onPopState);
+                return () => window.removeEventListener('popstate', onPopState);
+            }, []);
+
             useEffect(() => { if (window.lucide) window.lucide.createIcons(); }, [currentPage]);
 
-            const handleNavigate = (page) => {
+            const handleNavigate = (page, isPopState = false) => {
                 setCurrentPage(page);
                 window.scrollTo(0, 0);
+                if (!isPopState) {
+                    window.history.pushState({ page }, '', `#${page}`);
+                }
             };
 
             return (
@@ -414,7 +428,7 @@
                         <div className="bg-[#0f172a] text-white text-[10px] md:text-[11px] py-2 px-6 flex justify-between items-center font-bold uppercase tracking-widest">
                             <div className="flex gap-4 md:gap-6">
                                 <span className="flex items-center gap-2 shrink-0 tracking-widest leading-none">TEL: +84 274 3768 492</span>
-                                <span className="hidden md:flex items-center gap-2 tracking-widest leading-none">EMAIL: sales@agsvn.com</span>
+                                <span className="hidden md:flex items-center gap-2 tracking-widest leading-none uppercase">sales@agsvn.com</span>
                             </div>
                             <div className="hidden lg:block italic text-blue-400 tracking-widest uppercase">"Your Satisfaction, Our Motto"</div>
                         </div>
@@ -447,11 +461,11 @@
                                     <img src="Screenshot 2026-03-23 131218.png" alt="AGS Footer Logo" />
                                 </div>
                                 <p className="text-[10px] text-slate-400 leading-relaxed uppercase font-black tracking-[0.3em]">Alliance Global Services Co., Ltd</p>
-                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Leading precision machining and certified surface finishing facility based in Vietnam since 2005.</p>
+                                <p className="text-sm text-slate-500 leading-relaxed font-medium text-justify">Leading precision machining and certified surface finishing facility based in Vietnam since 2005.</p>
                             </div>
                             <div>
                                 <h4 className="text-[11px] font-black uppercase tracking-[0.3em] text-blue-600 mb-8 uppercase">Services</h4>
-                                <ul className="text-[13px] space-y-4 text-slate-500 font-bold uppercase tracking-widest">
+                                <ul className="text-[13px] space-y-4 text-slate-400 font-bold uppercase tracking-widest">
                                     <li><a href="#" className="hover:text-blue-600 transition-colors uppercase tracking-widest">CNC Machining</a></li>
                                     <li><a href="#" className="hover:text-blue-600 transition-colors uppercase tracking-widest">Surface Finishing</a></li>
                                     <li><a href="#" className="hover:text-blue-600 transition-colors uppercase tracking-widest">UHV Cleaning</a></li>
@@ -468,7 +482,7 @@
                             <div>
                                 <h4 className="text-[11px] font-black uppercase tracking-[0.3em] text-blue-600 mb-8 uppercase">Contact</h4>
                                 <div className="text-[13px] text-slate-500 space-y-4 font-bold uppercase tracking-tighter leading-relaxed">
-                                    <p className="flex gap-3 text-left"><Icon name="map-pin" className="text-blue-600 shrink-0" size={18}/> Lot B, 20th Street, IP Song Than 2, HCM City, VN</p>
+                                    <p className="flex gap-3 text-left"><Icon name="map-pin" className="text-blue-600 shrink-0" size={18}/> Lot B, 20th Street, IP Song Than 2, HCM, VN</p>
                                     <p className="flex gap-3 text-left"><Icon name="mail" className="text-blue-600 shrink-0" size={18}/> sales@agsvn.com</p>
                                 </div>
                             </div>
