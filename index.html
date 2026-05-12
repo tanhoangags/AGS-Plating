@@ -432,19 +432,13 @@
                             </div>
                             <div className="hidden lg:block italic text-blue-400 tracking-widest uppercase">"Your Satisfaction, Our Motto"</div>
                         </div>
-                        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center w-full">
-    <!-- Nhóm bên trái -->
-    <div class="logo-left">
-        <button onClick={() => handleNavigate('home')} class="focus:outline-none hover:opacity-80 transition-opacity">
-            <img src="viber_image_2026-05-12_09-25-44-445.jpg" alt="Logo Trai" style="height: 60px;" />
-        </button>
-    </div>
-
-    <!-- Nhóm bên phải -->
-    <div class="logo-right">
-        <img src="NQA AS9100 UK Logo.jpg" alt="Logo Phai" style="height: 60px;" />
-    </div>
-</div>
+                       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+                            <div className="logo-container">
+                                <button onClick={() => handleNavigate('home')} className="focus:outline-none hover:opacity-80 transition-opacity">
+                                    <img src="viber_image_2026-05-12_09-25-44-445.jpg" alt="Logo Trai" />
+                                    <img src="NQA AS9100 UK Logo.jpg" alt="Logo Phai"/>
+                                </button>
+                            </div>
 
                             <nav className="hidden lg:flex items-center gap-10 text-[12px] font-black uppercase tracking-[0.15em] text-slate-600">
                                 <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="hover:text-blue-600 transition-colors uppercase">Home</a>
