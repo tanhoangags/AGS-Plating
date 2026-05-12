@@ -433,18 +433,23 @@
                             <div className="hidden lg:block italic text-blue-400 tracking-widest uppercase">"Your Satisfaction, Our Motto"</div>
                         </div>
                        <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
-                            <div className="logo-container">
-                                <button onClick={() => handleNavigate('home')} className="focus:outline-none hover:opacity-80 transition-opacity">
-                                    <img src="viber_image_2026-05-12_09-25-44-445.jpg" alt="Logo Trai" />
-            
-                                </button>
-                            </div>
+                           <div className="logo-container flex items-center gap-6">
+    {/* Logo chính - Click để về Home */}
+    <button onClick={() => handleNavigate('home')} className="focus:outline-none hover:opacity-80 transition-opacity">
+        <img src="viber_image_2026-05-12_09-25-44-445.jpg" alt="Logo AGS" className="h-[50px] w-auto" />
+    </button>
+    
+    {/* Vạch ngăn cách nhẹ (tùy chọn) */}
+    <div className="h-8 w-[1px] bg-slate-200"></div>
+
+    {/* Logo chứng nhận mới */}
+    <img src="NQA AS9100 UK Logo.jpg" alt="AS9100 Certified" className="h-[45px] w-auto opacity-90" />
+</div>
+
 
                             <nav className="hidden lg:flex items-center gap-10 text-[12px] font-black uppercase tracking-[0.15em] text-slate-600">
                                 <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="hover:text-blue-600 transition-colors uppercase">Home</a>
                                 <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-blue-600 border-b-2 border-blue-600 pb-1 uppercase font-black">Service</a>
-                                <a href="#" className="hover:text-blue-600 transition-colors uppercase">Capability</a>
-                                <a href="#" className="hover:text-blue-600 transition-colors uppercase">Industries</a>
                                 <button onClick={() => handleNavigate('quote')} className="bg-red-600 text-white px-7 py-3 rounded-xl hover:bg-red-700 shadow-xl shadow-red-100 transition-all uppercase text-[11px] font-black tracking-widest">Request Quote</button>
                             </nav>
                         </div>
