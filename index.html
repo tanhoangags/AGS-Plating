@@ -428,35 +428,42 @@
             return (
                 <div className="min-h-screen flex flex-col">
                     <header className="bg-white header-shadow sticky top-0 z-50">
-                        <div className="bg-[#0f172a] text-white text-[20px] md:text-[11px] py-2 px-6 flex justify-between items-center font-bold uppercase tracking-widest">
-                            <div className="flex gap-4 md:gap-6">
-                                <span className="flex items-center gap-2 shrink-0 tracking-widest leading-none">TEL: +84 274 3768 492</span>
-                                <span className="hidden md:flex items-center gap-2 tracking-widest leading-none uppercase">sales@agsvn.com</span>
-                            </div>
-                            <div className="hidden lg:block italic text-blue-400 tracking-widest uppercase">Your Satisfaction, Our Motto</div>
-                        </div>
-                       <div className="max-w-8xl mx-auto px-8 py-4 flex justify-between items-center">
-                           <div className="logo-container flex items-center gap-6">
-    {/* Logo chính - Click để về Home */}
-    <button onClick={() => handleNavigate('home')} className="focus:outline-none hover:opacity-80 transition-opacity">
-        <img src="viber_image_2026-05-12_09-25-44-445.jpg" alt="Logo AGS" className="h-[70px] w-auto" />
-    </button>
-    
-    {/* Vạch ngăn cách nhẹ (tùy chọn) */}
-    <div className="h-8 w-[1px] bg-slate-200"></div>
+    {/* Bar thông tin trên cùng giữ nguyên */}
+    <div className="bg-[#0f172a] text-white text-[20px] md:text-[11px] py-2 px-6 flex justify-between items-center font-bold uppercase tracking-widest">
+        <div className="flex gap-4 md:gap-6">
+            <span className="flex items-center gap-2 shrink-0 tracking-widest leading-none">TEL: +84 274 3768 492</span>
+            <span className="hidden md:flex items-center gap-2 tracking-widest leading-none uppercase">sales@agsvn.com</span>
+        </div>
+        <div className="hidden lg:block italic text-blue-400 tracking-widest uppercase">Your Satisfaction, Our Motto</div>
+    </div>
 
-    {/* Logo chứng nhận mới */}
-    <img src="NQA AS9100 UK Logo.jpg" alt="AS9100 Certified" className="h-[70px] w-auto opacity-90" />
-</div>
+    <div className="max-w-8xl mx-auto px-8 py-4 flex justify-between items-center">
+        {/* 1. Phần bên trái: Chỉ giữ lại Logo chính */}
+        <div className="logo-container">
+            <button onClick={() => handleNavigate('home')} className="focus:outline-none hover:opacity-80 transition-opacity">
+                <img src="viber_image_2026-05-12_09-25-44-445.jpg" alt="Logo AGS" className="h-[70px] w-auto" />
+            </button>
+        </div>
 
+        {/* 2. Phần bên phải: Chứa Menu, Nút Quote và Logo chứng chỉ */}
+        <nav className="hidden lg:flex items-center gap-10 text-[12px] font-black uppercase tracking-[0.15em] text-slate-600">
+            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="hover:text-blue-600 transition-colors uppercase">Home</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-blue-600 border-b-2 border-blue-600 pb-1 uppercase font-black">Service</a>
+            
+            {/* Nút Request Quote */}
+            <button onClick={() => handleNavigate('quote')} className="bg-red-600 text-white px-7 py-3 rounded-xl hover:bg-red-700 shadow-xl shadow-red-100 transition-all uppercase text-[11px] font-black tracking-widest">
+                Request Quote
+            </button>
 
-                            <nav className="hidden lg:flex items-center gap-10 text-[12px] font-black uppercase tracking-[0.15em] text-slate-600">
-                                <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="hover:text-blue-600 transition-colors uppercase">Home</a>
-                                <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-blue-600 border-b-2 border-blue-600 pb-1 uppercase font-black">Service</a>
-                                <button onClick={() => handleNavigate('quote')} className="bg-red-600 text-white px-7 py-3 rounded-xl hover:bg-red-700 shadow-xl shadow-red-100 transition-all uppercase text-[11px] font-black tracking-widest">Request Quote</button>
-                            </nav>
-                        </div>
-                    </header>
+            {/* Vạch ngăn cách dọc (tùy chọn để tách biệt logo chứng chỉ) */}
+            <div className="h-8 w-[1px] bg-slate-200"></div>
+
+            {/* 3. Logo thứ 2 nằm ở vị trí sau cùng bên phải */}
+            <img src="NQA AS9100 UK Logo.jpg" alt="AS9100 Certified" className="h-[70px] w-auto opacity-90" />
+        </nav>
+    </div>
+</header>
+
 
                     <main className="flex-grow">
                         {currentPage === 'home' && <MainListView onNavigate={handleNavigate} />}
