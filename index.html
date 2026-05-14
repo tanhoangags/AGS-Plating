@@ -4,16 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGS Precision | Advanced Surface Finishing Solutions</title>
-    <!-- React & ReactDOM -->
+    <!-- Sửa link CDN chuẩn hoạt động trực tiếp -->
     <script src="unpkg.com"></script>
     <script src="unpkg.com"></script>
-    <!-- Babel -->
     <script src="unpkg.com"></script>
-    <!-- Tailwind CSS -->
     <script src="tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="unpkg.com"></script>
-    <!-- Google Fonts -->
     <link href="googleapis.com" rel="stylesheet">
     
     <style>
@@ -31,18 +27,17 @@
         .logo-container img { height: 70px; width: auto; object-fit: contain; }
         .type-box { border: 1px solid #e2e8f0; padding: 14px; border-radius: 12px; margin-top: 10px; background-color: #ffffff; }
         
-        /* --- ĐIỀU CHỈNH KÍCH THƯỚC CHUẨN CONTAINER HỆ THỐNG --- */
         .site-container {
             width: 100%;
-            max-width: 1440px; /* Giới hạn độ rộng tối đa chuẩn Desktop */
+            max-width: 1440px;
             margin-left: auto;
             margin-right: auto;
-            padding-left: 16px;  /* Khoảng đệm an toàn 2 bên cho Mobile */
+            padding-left: 16px;
             padding-right: 16px;
         }
         @media (min-width: 768px) {
             .site-container {
-                padding-left: 24px; /* Khoảng đệm rộng hơn cho Tablet/Laptop */
+                padding-left: 24px;
                 padding-right: 24px;
             }
         }
@@ -54,17 +49,14 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // --- Safe Icon Component ---
         const Icon = ({ name, size = 24, className = "" }) => {
             useEffect(() => { if (window.lucide) window.lucide.createIcons(); }, [name]);
             return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
         };
 
-        // --- Master Data ---
         const servicesData = {
             anodizing: {
                 title: "Anodizing",
-                image: "olga-kovalski-JuoFl82-w-A-unsplash.jpg",
                 overview: "Anodizing is an electrochemical process that converts the metal surface into a durable, corrosion-resistant finish. At AGS, we specialize in high-precision electrolytic oxidation where the aluminum part serves as the anode, creating a layer fully integrated with the substrate.",
                 typeBoxes: [
                     { title: "Type I (BSAA/TSAA)", content: "Thin, eco-friendly coating for aerospace. Best for corrosion resistance and paint adhesion with minimal dimensional change." },
@@ -84,7 +76,6 @@
             },
             alodine: {
                 title: "Alodine / Chemical Film",
-                image: "Alodine.jpg",
                 overview: "Chemical Film coating, also known as Alodine or Iridite, is a chromate conversion process for aluminum. It produces a protective film on the surface that prevents corrosion while maintaining electrical conductivity. At AGS, we utilize both Type I (containing hexavalent chromium) and Type II (trivalent chromium, RoHS compliant).",
                 typeBoxes: [
                     { title: "Type I (Hexavalent)", content: "Traditional chromate conversion yielding high corrosion defense for military specs." },
@@ -103,7 +94,6 @@
             },
             uhv: {
                 title: "UHV / Precision Cleaning",
-                image: "UHV.jpg",
                 overview: "Ultra-High Vacuum (UHV) cleaning is a specialized multi-stage decontamination process critical for semiconductor, aerospace, and high-energy physics applications. The primary goal is to remove all organic residues, oils, fingerprints, and particles.",
                 typeBoxes: [
                     { title: "Multi-Stage Ultrasonic", content: "Immersion cycles utilizing custom detergent chemistry and strict pure DI water baths." },
@@ -122,14 +112,12 @@
             }
         };
 
-        // --- Main App Component ---
         function App() {
             const [activeTab, setActiveTab] = useState("anodizing");
             const data = servicesData[activeTab];
 
             return (
                 <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
-                    {/* Header */}
                     <header className="bg-white header-shadow sticky top-0 z-50">
                         <div className="site-container py-4 flex items-center justify-between">
                             <div className="flex items-center space-x-3 logo-container">
@@ -144,9 +132,8 @@
                         </div>
                     </header>
 
-                    {/* Navigation Tabs Bar */}
                     <div className="bg-blue-900 text-white shadow-md">
-                        <div className="site-container !py-0 flex space-x-1 overflow-x-auto scrollbar-none">
+                        <div className="site-container flex space-x-1 overflow-x-auto scrollbar-none">
                             {Object.keys(servicesData).map((key) => (
                                 <button
                                     key={key}
@@ -159,25 +146,20 @@
                         </div>
                     </div>
 
-                    {/* Main Content Area */}
                     <main className="site-container py-8 flex-grow bg-grid fade-in" key={activeTab}>
-                        {/* Breadcrumbs */}
                         <div className="flex items-center text-sm text-slate-500 mb-6 bg-white p-3 rounded-lg shadow-sm">
                             <span className="breadcrumb-item cursor-pointer hover:text-blue-600">Home</span>
                             <span className="breadcrumb-item cursor-pointer hover:text-blue-600">Services</span>
                             <span className="breadcrumb-item font-semibold text-slate-800">{data.title}</span>
                         </div>
 
-                        {/* Top Grid Area: Overview and Specifications */}
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10">
-                            {/* Left Text / Info Panel */}
                             <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
                                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                                     <h1 className="text-3xl font-extrabold text-slate-900 mb-4 tracking-tight border-b-2 border-blue-100 pb-2">{data.title}</h1>
                                     <p className="text-slate-600 leading-relaxed text-base">{data.overview}</p>
                                 </div>
 
-                                {/* Dynamic Process Class Blocks */}
                                 <div className="space-y-3">
                                     <h3 className="text-lg font-bold text-slate-900 px-1 flex items-center gap-2">
                                         <Icon name="layers" size={18} className="text-blue-600" /> Process Variants & Configurations
@@ -191,7 +173,6 @@
                                 </div>
                             </div>
 
-                            {/* Right Technical Specification Table */}
                             <div className="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-100 p-6 flex flex-col justify-between">
                                 <div>
                                     <h3 className="text-xl font-bold text-slate-900 mb-4 pb-2 border-b flex items-center gap-2">
@@ -219,9 +200,7 @@
                             </div>
                         </div>
 
-                        {/* Middle Grid Area: Benefits & Applications */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-                            {/* Benefits */}
                             <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                                 <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                                     <Icon name="check-circle-2" size={20} className="text-emerald-500" /> Performance & Key Benefits
@@ -236,7 +215,6 @@
                                 </div>
                             </div>
 
-                            {/* Focus Fields */}
                             <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                                 <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                                     <Icon name="target" size={20} className="text-blue-500" /> Typical Component Focus
@@ -252,7 +230,6 @@
                             </div>
                         </div>
 
-                        {/* Bottom Area: Image Gallery */}
                         <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                             <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
                                 <Icon name="image" size={20} className="text-blue-600" /> Product Gallery & Finish References
@@ -260,7 +237,7 @@
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                 {data.gallery.map((img, idx) => (
                                     <div key={idx} className="service-card overflow-hidden rounded-xl bg-slate-100 border relative group shadow-sm">
-                                        <img src={`/images/${img}`} alt={`${data.title} reference`} onError={(e)=>{e.target.src="unsplash.com"}} className="w-full h-[200px] object-cover" />
+                                        <img src={`unsplash.com`} alt="gallery reference" className="w-full h-[200px] object-cover" />
                                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium">
                                             View Reference
                                         </div>
@@ -270,7 +247,6 @@
                         </div>
                     </main>
 
-                    {/* Footer */}
                     <footer className="bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
                         <div className="site-container">
                             <p>© 2026 AGS Precision Co., Ltd. All Rights Reserved. Advanced Surface Finishing Facility.</p>
