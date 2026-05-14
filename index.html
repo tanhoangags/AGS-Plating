@@ -323,11 +323,10 @@
             );
         };
 
-        // --- MainListView Component (Updated with translations) ---
-        const MainListView = ({ onNavigate }) => {
-            const { t } = useLanguage();
-            
-            return (
+        // --- MainListView Component
+       
+        const MainListView = ({ onNavigate }) => (
+
                 <div className="fade-in">
                     <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50 py-20 border-b border-slate-100">
                         <div className="max-w-7xl mx-auto px-6 text-center">
@@ -374,7 +373,7 @@
                     </div>
                 </div>
             );
-        };
+            
         // --- Main Application ---
         const App = () => {
             const [currentPage, setCurrentPage] = useState('home');
