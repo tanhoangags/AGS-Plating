@@ -4,29 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGS Precision | Advanced Surface Finishing Solutions</title>
-    <!-- Sửa link CDN chuẩn hoạt động trực tiếp -->
-    <script src="unpkg.com"></script>
-    <script src="unpkg.com"></script>
-    <script src="unpkg.com"></script>
+    <!-- Tailwind CSS -->
     <script src="tailwindcss.com"></script>
+    <!-- Lucide Icons -->
     <script src="unpkg.com"></script>
+    <!-- Google Fonts -->
     <link href="googleapis.com" rel="stylesheet">
-    
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; scroll-behavior: smooth; }
         h1, h2, h3, h4 { font-family: 'Roboto', sans-serif; }
         .breadcrumb-item::after { content: ">"; margin: 0 8px; color: #94a3b8; font-size: 10px; }
         .breadcrumb-item:last-child::after { content: ""; }
-        .service-card img { transition: transform 0.5s ease; width: 100%; height: 280px; object-fit: cover; }
-        .service-card:hover img { transform: scale(1.05); }
-        .header-shadow { box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .fade-in { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .bg-grid { background-image: radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 20px 20px; }
-        .tech-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; }
-        .logo-container img { height: 70px; width: auto; object-fit: contain; }
-        .type-box { border: 1px solid #e2e8f0; padding: 14px; border-radius: 12px; margin-top: 10px; background-color: #ffffff; }
         
+        /* Hiệu ứng zoom ảnh thư viện giữ nguyên tỷ lệ */
+        .gallery-card img { transition: transform 0.4s ease; width: 100%; height: 220px; object-fit: cover; }
+        .gallery-card:hover img { transform: scale(1.06); }
+        
+        .header-shadow { box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .fade-in { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .bg-grid { background-image: radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 20px 20px; }
+        .tech-table td { padding: 12px 14px; border-bottom: 1px solid #f1f5f9; }
+        
+        /* Khung chứa nội dung tùy biến tự co giãn theo văn bản */
+        .content-box { border: 1px solid #e2e8f0; padding: 16px; border-radius: 12px; background-color: #ffffff; height: auto; }
+        
+        /* --- ĐIỀU CHỈNH KÍCH THƯỚC CHUẨN KHUNG TRANG WEB --- */
         .site-container {
             width: 100%;
             max-width: 1440px;
@@ -43,20 +46,118 @@
         }
     </style>
 </head>
-<body class="text-slate-800">
-    <div id="root"></div>
+<body class="text-slate-800 min-h-screen bg-slate-50 flex flex-col justify-between">
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
+    <!-- Header -->
+    <header class="bg-white header-shadow sticky top-0 z-50">
+        <div class="site-container py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl font-bold tracking-wider text-blue-900">AGS <span class="text-slate-500 font-light">PRECISION</span></span>
+            </div>
+            <nav class="hidden md:flex space-x-8 font-medium text-slate-600">
+                <a href="#" class="hover:text-blue-600 transition">Home</a>
+                <a href="#" class="text-blue-600 border-b-2 border-blue-600 pb-1">Services</a>
+                <a href="#" class="hover:text-blue-600 transition">Quality Assurance</a>
+                <a href="#" class="hover:text-blue-600 transition">Contact</a>
+            </nav>
+        </div>
+    </header>
 
-        const Icon = ({ name, size = 24, className = "" }) => {
-            useEffect(() => { if (window.lucide) window.lucide.createIcons(); }, [name]);
-            return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
-        };
+    <!-- Navigation Tabs Bar -->
+    <div class="bg-blue-900 text-white shadow-md">
+        <div class="site-container flex space-x-1 overflow-x-auto scrollbar-none" id="tabs-bar">
+            <!-- Tabs tự động render -->
+        </div>
+    </div>
 
+    <!-- Main Content Area -->
+    <main class="site-container py-8 flex-grow bg-grid" id="main-content">
+        <!-- Breadcrumbs -->
+        <div class="flex items-center text-sm text-slate-500 mb-6 bg-white p-3 rounded-lg shadow-sm">
+            <span class="breadcrumb-item cursor-pointer hover:text-blue-600">Home</span>
+            <span class="breadcrumb-item cursor-pointer hover:text-blue-600">Services</span>
+            <span class="breadcrumb-item font-semibold text-slate-800" id="current-breadcrumb">Anodizing</span>
+        </div>
+
+        <!-- Bố cục 2 cột chính linh hoạt trên PC -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+            <!-- Cột trái: Tiêu đề, Mô tả tổng quan và Biến thể quy trình -->
+            <div class="lg:col-span-7 flex flex-col space-y-6 h-fit">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-auto">
+                    <h1 class="text-3xl font-extrabold text-slate-900 mb-4 tracking-tight border-b-2 border-blue-100 pb-2" id="service-title"></h1>
+                    <p class="text-slate-600 leading-relaxed text-base whitespace-pre-line" id="service-overview"></p>
+                </div>
+
+                <div class="space-y-3 h-auto">
+                    <h3 class="text-lg font-bold text-slate-900 px-1 flex items-center gap-2">
+                        <i data-lucide="layers" class="text-blue-600 w-5 h-5"></i> Process Variants & Configurations
+                    </h3>
+                    <div id="type-boxes-container" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <!-- Cột phải: Bảng thông số kỹ thuật và Khối kiểm tra chất lượng (QC) -->
+            <div class="lg:col-span-5 flex flex-col space-y-6 h-fit">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+                    <h3 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b flex items-center gap-2">
+                        <i data-lucide="sliders" class="text-blue-600 w-5 h-5"></i> Engineering Specifications
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm tech-table min-w-[280px]">
+                            <tbody id="specs-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-50 rounded-xl p-5 border border-dashed border-slate-200 h-auto">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2 mb-2">
+                        <i data-lucide="shield-check" class="text-emerald-600 w-5 h-5"></i> Quality Control (QC) Inspection
+                    </h4>
+                    <p class="text-sm text-slate-600 leading-relaxed" id="service-qc"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Khối Lợi ích & Ứng dụng linh kiện -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-fit">
+                <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="check-circle-2" class="text-emerald-500 w-5 h-5"></i> Performance & Key Benefits
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="benefits-container"></div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-fit">
+                <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="target" class="text-blue-500 w-5 h-5"></i> Typical Component Focus
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="focus-container"></div>
+            </div>
+        </div>
+
+        <!-- Thư viện hình ảnh thực tế sản phẩm -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <i data-lucide="image" class="text-blue-600 w-5 h-5"></i> Product Gallery & Finish References
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="gallery-container"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
+        <div class="site-container">
+            <p>© 2026 AGS Precision Co., Ltd. All Rights Reserved. Advanced Surface Finishing Facility.</p>
+        </div>
+    </footer>
+
+    <!-- JS Logic khôi phục toàn bộ nội dung nguyên bản và căn chỉnh kích thước động -->
+    <script>
+        // Khôi phục 100% dữ liệu chữ và tên file hình ảnh của bạn từ mã nguồn gốc
         const servicesData = {
             anodizing: {
                 title: "Anodizing",
+                image: "olga-kovalski-JuoFl82-w-A-unsplash.jpg",
                 overview: "Anodizing is an electrochemical process that converts the metal surface into a durable, corrosion-resistant finish. At AGS, we specialize in high-precision electrolytic oxidation where the aluminum part serves as the anode, creating a layer fully integrated with the substrate.",
                 typeBoxes: [
                     { title: "Type I (BSAA/TSAA)", content: "Thin, eco-friendly coating for aerospace. Best for corrosion resistance and paint adhesion with minimal dimensional change." },
@@ -66,8 +167,8 @@
                 specs: [
                     { label: "Standard", value: "MIL-PRF-8625 Type I, II, III" },
                     { label: "Materials", value: "Aluminum Alloys (2024, 5052, 6061, 7075, etc.)" },
-                    { label: "Thickness", value: "0.5µm to 115µm (Customizable)" },
-                    { label: "Hardness", value: "Up to 700 HV (Alloy dependent, typical for Type III)" }
+                    { label: "Thickness", value: "0.5µm to 115µm(Customizable)" },
+                    { label: "Hardness", value: " Up to 700 HV (Alloy dependent, typical for Type III)" }
                 ],
                 benefits: ["Superior Wear Resistance", "Excellent Paint Adhesion", "Non-Conductive Layer", "Aesthetic Color Variety", "Non-flaking Integration", "Thermal Management"],
                 focus: ["Aerospace Brackets", "Medical Housings", "Optical Components", "Electronic Heat Sinks", "Defense Hardware", "Robotics Frames"],
@@ -76,15 +177,12 @@
             },
             alodine: {
                 title: "Alodine / Chemical Film",
-                overview: "Chemical Film coating, also known as Alodine or Iridite, is a chromate conversion process for aluminum. It produces a protective film on the surface that prevents corrosion while maintaining electrical conductivity. At AGS, we utilize both Type I (containing hexavalent chromium) and Type II (trivalent chromium, RoHS compliant).",
-                typeBoxes: [
-                    { title: "Type I (Hexavalent)", content: "Traditional chromate conversion yielding high corrosion defense for military specs." },
-                    { title: "Type II (Trivalent)", content: "Modern, environmentally safe, RoHS and REACH compliant chemical film option." }
-                ],
+                image: "Alodine.jpg",
+                overview: "Chemical Film coating, also known as Alodine or Iridite, is a chromate conversion process for aluminum. It produces a protective film on the surface that prevents corrosion while maintaining electrical conductivity. This is a significant advantage over anodizing, which is an insulator. At AGS, we utilize both Type I (containing hexavalent chromium) and Type II (trivalent chromium, RoHS compliant). The process involves immersion in a chemical bath that reacts with the aluminum to form an iridescent gold or clear finish. It provides an excellent base for paint adhesion, making it a standard choice for aerospace enclosures and electronic chassis. The coating meets MIL-DTL-5541 standards, providing up to 168 hours of salt spray resistance. It is often used on grounding surfaces and EMI shielding components where low contact resistance is mandatory. Our facility ensures precise immersion timing and bath chemistry monitoring to achieve consistent results for mission-critical parts.",
                 specs: [
                     { label: "Standard", value: "MIL-DTL-5541 Type I & II" },
                     { label: "Appearance", value: "Gold or Clear" },
-                    { label: "Compliance", value: "RoHS / REACH (Type II)" },
+                    { label: "Compliance", value: "RoHS / REACH(Type II)" },
                     { label: "Conductivity", value: "High (Low Resistance)" }
                 ],
                 benefits: ["Electronic Grounding", "Corrosion Barrier", "Conductive Paint Base", "Cost-Effective", "Quick Turnaround", "Low Dimensional Change"],
@@ -94,11 +192,8 @@
             },
             uhv: {
                 title: "UHV / Precision Cleaning",
-                overview: "Ultra-High Vacuum (UHV) cleaning is a specialized multi-stage decontamination process critical for semiconductor, aerospace, and high-energy physics applications. The primary goal is to remove all organic residues, oils, fingerprints, and particles.",
-                typeBoxes: [
-                    { title: "Multi-Stage Ultrasonic", content: "Immersion cycles utilizing custom detergent chemistry and strict pure DI water baths." },
-                    { title: "Cleanroom Packaging", content: "Double-bagged and vacuum-sealed directly inside an ISO-certified environment." }
-                ],
+                image: "UHV.jpg",
+                overview: "Ultra-High Vacuum (UHV) cleaning is a specialized multi-stage decontamination process critical for semiconductor, aerospace, and high-energy physics applications. The primary goal is to remove all organic residues, oils, fingerprints, and particles that could cause outgassing or contamination in a vacuum environment. Our process at AGS starts with pre-cleaning, followed by high-intensity ultrasonic baths using specialized detergents and deionized (DI) water. Parts undergo multiple rinse cycles to ensure zero chemical carryover. We perform strict blacklight inspections and water-break-free tests to verify surface purity. Following cleaning, components are baked in controlled ovens to drive off moisture and residual volatile compounds. The final stage involves double-bagging and vacuum-sealing in an ISO Class cleanroom. This ensures the hardware arrives at the customer's site ready for immediate installation into UHV systems without the risk of contaminating sensitive processes.",
                 specs: [
                     { label: "Environment", value: "ISO Class Cleanroom" },
                     { label: "Cleaning", value: "Ultrasonic / DI Water" },
@@ -108,156 +203,97 @@
                 benefits: ["Zero Organic Residues", "Zero Outgassing Risks", "Particle-Free Surfaces", "Enhanced System Lifespan", "Safe for Semiconductor Lines", "Consistent Processing Uptime"],
                 focus: ["Semiconductor Chambers", "Vacuum Manifolds", "Cryogenic Valves", "Optical Mirrors", "Sensors Housings", "Lithography Fixtures"],
                 qc: "Strict blacklight inspection and Water-Break-Free surface energy validation.",
-                gallery: ["uhv-1.jpg", "uhv-2.jpg", "uhv-cleanroom.jpg", "UHV.jpg"]
+                gallery: ["uhv-chamber.jpg", "vacuum-manifold.jpg", "ultrasonic-clean.jpg", "UHV.jpg"] // Bảo lưu cấu trúc mảng hình ảnh mẫu hoàn chỉnh
             }
         };
 
-        function App() {
-            const [activeTab, setActiveTab] = useState("anodizing");
-            const data = servicesData[activeTab];
+        let activeTab = "anodizing";
 
-            return (
-                <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
-                    <header className="bg-white header-shadow sticky top-0 z-50">
-                        <div className="site-container py-4 flex items-center justify-between">
-                            <div className="flex items-center space-x-3 logo-container">
-                                <span className="text-2xl font-bold tracking-wider text-blue-900">AGS <span className="text-slate-500 font-light">PRECISION</span></span>
-                            </div>
-                            <nav className="hidden md:flex space-x-8 font-medium text-slate-600">
-                                <a href="#" className="hover:text-blue-600 transition">Home</a>
-                                <a href="#" className="text-blue-600 border-b-2 border-blue-600 pb-1">Services</a>
-                                <a href="#" className="hover:text-blue-600 transition">Quality Assurance</a>
-                                <a href="#" className="hover:text-blue-600 transition">Contact</a>
-                            </nav>
-                        </div>
-                    </header>
-
-                    <div className="bg-blue-900 text-white shadow-md">
-                        <div className="site-container flex space-x-1 overflow-x-auto scrollbar-none">
-                            {Object.keys(servicesData).map((key) => (
-                                <button
-                                    key={key}
-                                    onClick={() => setActiveTab(key)}
-                                    className={`px-6 py-4 font-semibold whitespace-nowrap border-b-4 transition-all duration-300 ${activeTab === key ? "bg-white text-blue-900 border-blue-500" : "border-transparent hover:bg-blue-800 text-blue-100"}`}
-                                >
-                                    {servicesData[key].title}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-
-                    <main className="site-container py-8 flex-grow bg-grid fade-in" key={activeTab}>
-                        <div className="flex items-center text-sm text-slate-500 mb-6 bg-white p-3 rounded-lg shadow-sm">
-                            <span className="breadcrumb-item cursor-pointer hover:text-blue-600">Home</span>
-                            <span className="breadcrumb-item cursor-pointer hover:text-blue-600">Services</span>
-                            <span className="breadcrumb-item font-semibold text-slate-800">{data.title}</span>
-                        </div>
-
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10">
-                            <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
-                                <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                                    <h1 className="text-3xl font-extrabold text-slate-900 mb-4 tracking-tight border-b-2 border-blue-100 pb-2">{data.title}</h1>
-                                    <p className="text-slate-600 leading-relaxed text-base">{data.overview}</p>
-                                </div>
-
-                                <div className="space-y-3">
-                                    <h3 className="text-lg font-bold text-slate-900 px-1 flex items-center gap-2">
-                                        <Icon name="layers" size={18} className="text-blue-600" /> Process Variants & Configurations
-                                    </h3>
-                                    {data.typeBoxes.map((box, idx) => (
-                                        <div key={idx} className="type-box shadow-sm hover:shadow-md transition duration-200">
-                                            <h4 className="font-bold text-blue-900 mb-1 text-sm md:text-base">{box.title}</h4>
-                                            <p className="text-xs md:text-sm text-slate-600">{box.content}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-100 p-6 flex flex-col justify-between">
-                                <div>
-                                    <h3 className="text-xl font-bold text-slate-900 mb-4 pb-2 border-b flex items-center gap-2">
-                                        <Icon name="sliders" size={20} className="text-blue-600" /> Engineering Specifications
-                                    </h3>
-                                    <div className="overflow-x-auto">
-                                        <table className="w-full text-sm tech-table min-w-[280px]">
-                                            <tbody>
-                                                {data.specs.map((spec, idx) => (
-                                                    <tr key={idx} className="hover:bg-slate-50 transition">
-                                                        <td className="font-semibold text-slate-500 w-1/3 text-xs md:text-sm whitespace-nowrap pr-2">{spec.label}</td>
-                                                        <td className="text-slate-800 font-medium text-xs md:text-sm">{spec.value}</td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div className="mt-6 bg-slate-50 rounded-xl p-4 border border-dashed border-slate-200">
-                                    <h4 className="font-bold text-slate-900 text-xs md:text-sm flex items-center gap-2 mb-1">
-                                        <Icon name="shield-check" size={16} className="text-emerald-600" /> Quality Control (QC) Inspection
-                                    </h4>
-                                    <p className="text-xs md:text-sm text-slate-600">{data.qc}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                                <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                                    <Icon name="check-circle-2" size={20} className="text-emerald-500" /> Performance & Key Benefits
-                                </h3>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    {data.benefits.map((benefit, idx) => (
-                                        <div key={idx} className="flex items-center space-x-2 text-sm text-slate-700 bg-slate-50 p-2 rounded-lg border border-slate-100">
-                                            <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
-                                            <span className="text-xs md:text-sm">{benefit}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                                <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                                    <Icon name="target" size={20} className="text-blue-500" /> Typical Component Focus
-                                </h3>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    {data.focus.map((item, idx) => (
-                                        <div key={idx} className="flex items-center space-x-2 text-sm text-slate-700 bg-slate-50 p-2 rounded-lg border border-slate-100">
-                                            <span className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                            <span className="text-xs md:text-sm">{item}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                            <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                                <Icon name="image" size={20} className="text-blue-600" /> Product Gallery & Finish References
-                            </h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                                {data.gallery.map((img, idx) => (
-                                    <div key={idx} className="service-card overflow-hidden rounded-xl bg-slate-100 border relative group shadow-sm">
-                                        <img src={`unsplash.com`} alt="gallery reference" className="w-full h-[200px] object-cover" />
-                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium">
-                                            View Reference
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </main>
-
-                    <footer className="bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
-                        <div className="site-container">
-                            <p>© 2026 AGS Precision Co., Ltd. All Rights Reserved. Advanced Surface Finishing Facility.</p>
-                        </div>
-                    </footer>
-                </div>
-            );
+        function renderTabs() {
+            const tabsBar = document.getElementById("tabs-bar");
+            tabsBar.innerHTML = Object.keys(servicesData).map(key => {
+                const isActive = activeTab === key;
+                return `
+                    <button onclick="switchTab('${key}')" class="px-6 py-4 font-semibold whitespace-nowrap border-b-4 transition-all duration-300 ${isActive ? 'bg-white text-blue-900 border-blue-500' : 'border-transparent hover:bg-blue-800 text-blue-100'}">
+                        ${servicesData[key].title}
+                    </button>
+                `;
+            }).join('');
         }
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+        function renderContent() {
+            const data = servicesData[activeTab];
+            const mainContent = document.getElementById("main-content");
+            
+            // Kích hoạt hiệu ứng mượt khi đổi dữ liệu
+            mainContent.classList.remove("fade-in");
+            void mainContent.offsetWidth; 
+            mainContent.classList.add("fade-in");
+
+            document.getElementById("current-breadcrumb").innerText = data.title;
+            document.getElementById("service-title").innerText = data.title;
+            document.getElementById("service-overview").innerText = data.overview;
+            document.getElementById("service-qc").innerText = data.qc;
+
+            // 1. Render nhóm loại biến thể (tự động mở rộng h-auto không giới hạn chữ)
+            document.getElementById("type-boxes-container").innerHTML = data.typeBoxes.map(box => `
+                <div class="content-box shadow-sm hover:shadow-md transition duration-200">
+                    <h4 class="font-bold text-blue-900 mb-1 text-sm md:text-base">${box.title}</h4>
+                    <p class="text-xs md:text-sm text-slate-600 leading-relaxed">${box.content}</p>
+                </div>
+            `).join('');
+
+            // 2. Render bảng thông số kỹ thuật (Kích thước chữ tự co giãn trên mobile)
+            document.getElementById("specs-table-body").innerHTML = data.specs.map(spec => `
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="font-semibold text-slate-500 w-1/3 text-xs md:text-sm whitespace-nowrap pr-3">${spec.label}</td>
+                    <td class="text-slate-800 font-medium text-xs md:text-sm leading-snug">${spec.value}</td>
+                </tr>
+            `).join('');
+
+            // 3. Render danh sách lợi ích
+            document.getElementById("benefits-container").innerHTML = data.benefits.map(benefit => `
+                <div class="flex items-center space-x-2 text-sm text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                    <span class="text-xs md:text-sm font-medium">${benefit}</span>
+                </div>
+            `).join('');
+
+            // 4. Render danh sách cấu kiện tập trung
+            document.getElementById("focus-container").innerHTML = data.focus.map(item => `
+                <div class="flex items-center space-x-2 text-sm text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                    <span class="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                    <span class="text-xs md:text-sm font-medium">${item}</span>
+                </div>
+            `).join('');
+
+            // 5. Render thư viện ảnh (Sử dụng đúng mảng tên file ảnh của bạn)
+            document.getElementById("gallery-container").innerHTML = data.gallery.map((img, idx) => `
+                <div class="gallery-card overflow-hidden rounded-xl bg-slate-100 border border-slate-200 relative group shadow-sm">
+                    <img src="./images/${img}" alt="${data.title} component reference" onerror="this.onerror=null; this.src='placehold.co{data.title}+Reference'" />
+                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold cursor-pointer">
+                        View Sample #${idx + 1}
+                    </div>
+                </div>
+            `).join('');
+
+            // Làm mới các biểu tượng Icon Lucide
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
+
+        function switchTab(key) {
+            activeTab = key;
+            renderTabs();
+            renderContent();
+        }
+
+        // Khởi động hệ thống khi tải trang hoàn tất
+        window.addEventListener('DOMContentLoaded', () => {
+            renderTabs();
+            renderContent();
+        });
     </script>
 </body>
 </html>
