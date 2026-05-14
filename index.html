@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,10 +28,8 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .bg-grid { background-image: radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 20px 20px; }
         .tech-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; }
-        .logo-container img { height: 100px; width: auto; object-fit: contain; }
+        .logo-container img { height: 50px; width: auto; object-fit: contain; }
         .type-box { border: 1px solid #e2e8f0; padding: 14px; border-radius: 12px; margin-top: 10px; background-color: #ffffff; }
-
-
     </style>
 </head>
 <body class="text-slate-800">
@@ -48,8 +47,8 @@
         // --- Master Data ---
         const servicesData = {
             anodizing: {
-                title: "Anodizing",
-                image: "IMG_0015.PNG",
+                title: "Precision Anodizing",
+                image: "olga-kovalski-JuoFl82-w-A-unsplash.jpg",
                 overview: "Anodizing is an electrochemical process that converts the metal surface into a durable, corrosion-resistant finish. At AGS, we specialize in high-precision electrolytic oxidation where the aluminum part serves as the anode, creating a layer fully integrated with the substrate.",
                 typeBoxes: [
                     { title: "Type I (BSAA/TSAA)", content: "Thin, eco-friendly coating for aerospace. Best for corrosion resistance and paint adhesion with minimal dimensional change." },
@@ -65,7 +64,7 @@
                 benefits: ["Superior Wear Resistance", "Excellent Paint Adhesion", "Non-Conductive Layer", "Aesthetic Color Variety", "Non-flaking Integration", "Thermal Management"],
                 focus: ["Aerospace Brackets", "Medical Housings", "Optical Components", "Electronic Heat Sinks", "Defense Hardware", "Robotics Frames"],
                 qc: "Coating thickness verification via Eddy Current and color matching under D65 lighting.",
-                gallery: ["viber_image_2026-03-25_15-33-15-845.jpg", "sandblast anodizing.jpg", "red anodizing 2.jpg", "hard anodizing.jpg", "IMG_0017.PNG", "IMG_0016.PNG", "IMG_0019.PNG", "IMG_0016.PNG"]
+                gallery: ["viber_image_2026-03-25_15-33-15-845.jpg", "sandblast anodizing.jpg", "red anodizing 2.jpg", "hard anodizing.jpg"]
             },
             alodine: {
                 title: "Alodine / Chemical Film",
@@ -113,7 +112,7 @@
                 gallery: ["elesstroless nickel.jpg"]
             },
             passivation: {
-                title: "Passivation",
+                title: "Passivation Service",
                 image: "mastars-4Jdp3ZgC16U-unsplash.jpg",
                 overview: "Passivation is a non-electrolytic process that typically uses nitric or citric acid to remove free iron from the surface of stainless steel. By removing this free iron—which often comes from machining tools or environmental exposure—the process allows the material's natural chromium content to react with oxygen, forming a dense, transparent protective oxide layer. This 'passive' layer is what makes stainless steel truly stainless. Without proper passivation, stainless steel can experience localized pitting or surface rust in demanding environments. At AGS, our passivation processes comply with ASTM A967 and AMS 2700 standards. We handle 300-series and 400-series stainless steels, along with precipitation-hardened (PH) alloys. The treatment is essential for medical surgical instruments to ensure biocompatibility and for aerospace fluid fittings to prevent contamination. Our quality verification includes copper sulfate testing and humidity chamber exposure.",
                 specs: [
@@ -128,7 +127,7 @@
                 gallery: ["mastars-4Jdp3ZgC16U-unsplash.jpg"]
             },
             electropolishing: {
-                title: "Electropolishing",
+                title: "Precision Electropolishing",
                 image: "electropolishing.jpg",
                 overview: "Precision Electropolishing is often described as 'reverse plating.' It is an electrochemical process that removes a microscopic layer of material from the surface of a metal part, typically stainless steel. By selectively removing metal from the peaks of the surface profile, electropolishing smooths the surface, removes micro-burrs, and eliminates surface cracks or stress points. The result is a mirror-like, high-luster finish that is not only aesthetically pleasing but also ultra-clean. This process significantly enriches the surface with chromium, providing much higher corrosion resistance than standard chemical passivation. For AGS customers in the semiconductor and pharmaceutical industries, electropolishing is mandatory to ensure that gas lines and tanks are free of microscopic crevices where bacteria or particles could hide. It also provides stress relief for precision springs and delicate hardware. We monitor Ra before and after the process.",
                 specs: [
@@ -322,55 +321,49 @@
             );
         };
 
-        // --- MainListView Component
-       
-        const MainListView = ({ onNavigate }) => {
-            return (
-                <div className="fade-in">
-                    <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50 py-20 border-b border-slate-100">
-                        <div className="max-w-7xl mx-auto px-6 text-center">
-                            <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tight leading-none mb-6 gradient-text scale-in">
-                                Surface Finishing Excellence
-                            </h1>
-                            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-medium">
-                                AS9100D certified precision surface treatments for aerospace, semiconductor, and defense industries
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className="max-w-7xl mx-auto px-6 py-20">
-                        <div className="grid md:grid-cols-3 gap-8">
-                            {Object.keys(servicesData).map((key, index) => {
-                                const service = servicesData[key];
-                                return (
-                                    <div 
-                                        key={key} 
-                                        className="service-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-lg cursor-pointer group"
-                                        onClick={() => onNavigate(key)}
-                                        style={{ animationDelay: `${index * 0.1}s` }}
-                                    >
-                                        <div className="relative overflow-hidden">
-                                            <img src={service.image} alt={service.title} />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                        </div>
-                                        <div className="p-6">
-                                            <h3 className="text-2xl font-black uppercase tracking-tight text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">
-                                                {service.title}
-                                            </h3>
-                                            <p className="text-[14px] text-slate-500 leading-relaxed line-clamp-3">
-                                                {service.overview.substring(0, 150)}...
-                                            </p>
-                                            <div className="mt-6 flex items-center gap-2 text-blue-600 font-bold text-sm uppercase tracking-wider group-hover:gap-4 transition-all">
-                                                <span>Learn More</span>
-                                                <Icon name="arrow-right" size={18} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
+        // --- View: Main ListView ---
+        const MainListView = ({ onNavigate }) => (
+            <div className="fade-in">
+                <div className="bg-slate-50 border-b border-slate-200 text-left">
+                    <div className="max-w-7xl mx-auto px-6 py-14">
+                        <nav className="flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">
+                            <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('home'); }} className="breadcrumb-item hover:text-blue-600 transition-colors">Home</a>
+                            <span className="breadcrumb-item text-slate-900 font-bold uppercase">Service</span>
+                        </nav>
+                        <h1 className="text-5xl font-black text-slate-900 tracking-tight uppercase leading-none">Finishing service</h1>
                     </div>
                 </div>
+
+                <section className="max-w-7xl mx-auto px-6 py-20">
+                    <div className="bg-white p-12 md:p-16 rounded-[3rem] border border-slate-100 shadow-sm leading-relaxed text-slate-600 text-xl text-justify bg-grid relative overflow-hidden">
+                        <div className="relative z-10 text-justify">
+                            <p className="mb-6 leading-relaxed font-medium">In addition to high precision prototype machining technology, <strong>AGS</strong> also has rich experience in finishing service. With the support of our internal laboratories or partner suppliers, we can complete various finishing services to meet your visual or functional requirements.</p>
+                            <p className="mb-6 leading-relaxed">Finishing service is a process used to change the prototype surface to give it a unique or desired appearance or function. Different technologies are used to improve appearance, adhesion, weldability, corrosion resistance, hardness, conductivity and other properties.</p>
+                            <p>Regardless of the processing method, <strong>AGS</strong> can provide high quality finishing service for your prototype. We have skilled experts to complete the task, ensuring your prototype machining quality is exceptionally high.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="max-w-7xl mx-auto px-6 py-12 text-left">
+                    <div className="grid md:grid-cols-2 gap-x-12 gap-y-24">
+                        {Object.keys(servicesData).map((key) => (
+                            <div key={key} className="service-card flex flex-col gap-8 cursor-pointer group" onClick={() => onNavigate(key)}>
+                                <div className="overflow-hidden rounded-[2rem] shadow-xl border border-slate-200 relative">
+                                    <img src={servicesData[key].image} alt={servicesData[key].title} />
+                                    <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/40 transition-all flex items-center justify-center text-center">
+                                        <div className="bg-white text-blue-900 px-8 py-4 rounded-full font-black uppercase text-[11px] tracking-[0.2em] opacity-0 group-hover:opacity-100 transform translate-y-6 group-hover:translate-y-0 transition-all shadow-xl">View Details & Specs</div>
+                                    </div>
+                                </div>
+                                <div className="text-left px-4 md:px-0">
+                                    <h2 className="text-3xl font-black text-slate-900 mb-4 text-blue-700 underline decoration-blue-200 decoration-4 underline-offset-8 group-hover:text-blue-500 transition-colors uppercase tracking-tighter leading-tight">{servicesData[key].title}</h2>
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6 italic">Spec: {servicesData[key].specs[0].value}</p>
+                                    <p className="text-sm leading-relaxed text-slate-600 line-clamp-3 text-justify">{servicesData[key].overview}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
                 <section id="standards" className="bg-slate-900 text-white py-32 mt-32">
                     <div className="max-w-6xl mx-auto px-6 text-center">
                         <h2 className="text-4xl font-black mb-20 uppercase tracking-tighter">Surface Finishing Selection Guide</h2>
@@ -404,8 +397,9 @@
                         </div>
                     </div>
                 </section>
-            );
-            };  
+            </div>
+        );
+
         // --- Main Application ---
         const App = () => {
             const [currentPage, setCurrentPage] = useState('home');
@@ -432,102 +426,29 @@
             return (
                 <div className="min-h-screen flex flex-col">
                     <header className="bg-white header-shadow sticky top-0 z-50">
-    {/* Bar thông tin trên cùng */}
-    <div className="bg-gradient-to-r from-[#0f172a] to-blue-900 text-white text-[20px] md:text-[14px] py-3 px-6 flex justify-between items-center font-bold uppercase tracking-widest shadow-lg">
-        <div className="flex gap-4 md:gap-6 items-center">
-            <div className="flex items-center gap-2 shrink-0 tracking-widest leading-none hover:text-blue-300 transition-colors cursor-pointer">
-                <span>📞</span>
-                <span>+84 274 3768 492</span>
-            </div>
-            <div className="hidden md:flex items-center gap-2 tracking-widest leading-none hover:text-blue-300 transition-colors cursor-pointer">
-                <span>✉️</span>
-                <span>sales@agsvn.com</span>
-            </div>
-        </div>
-        <div className="hidden lg:flex italic text-blue-300 tracking-widest uppercase text-[14px] font-bold animate-pulse">✨ Your Satisfaction, Our Motto</div>
-    </div>
-
-</header>
-
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-    <div className="max-w-8xl mx-auto px-4 md:px-8 py-3 md:py-4 flex justify-between items-center">
-        
-        {/* 1. Phần bên trái: Khối chứa Logo chính (Tự co giãn kích thước linh hoạt) */}
-        <div className="logo-container">
-            <button onClick={() => handleNavigate('home')} className="focus:outline-none hover:opacity-80 transition-opacity flex items-center">
-                <img 
-                    src="viber_image_2026-05-12_09-25-44-445.jpg" 
-                    alt="Logo AGS" 
-                    className="h-[65px] md:h-[150px] w-auto object-contain transition-all duration-300" 
-                />
-            </button>
-        </div>
-
-        {/* 2. Phần bên phải: Chứa Menu, Nút Quote và Logo chứng chỉ (Chỉ hiện trên PC từ màn hình lg trở lên) */}
-        <nav className="hidden lg:flex items-center gap-8 xl:gap-10 text-[18px] xl:text-[20px] font-black uppercase tracking-[0.15em] text-slate-600">
-            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="hover:text-blue-600 transition-colors uppercase">Home</a>
-            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-blue-600 border-b-2 border-blue-600 pb-1 uppercase font-black">Service</a>
-            
-            {/* Nút Request Quote */}
-            <button onClick={() => handleNavigate('quote')} className="bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 shadow-xl shadow-red-100 transition-all uppercase text-[11px] font-black tracking-widest whitespace-nowrap">
-                Request Quote
-            </button>
-
-            {/* Vạch ngăn cách dọc */}
-            <div className="h-8 w-[1px] bg-slate-200"></div>
-
-            {/* 3. Logo thứ 2 nằm ở vị trí sau cùng bên phải */}
-            <img 
-                src="NQA.jpg" 
-                alt="AS9100 Certified" 
-                className="h-[90px] w-auto opacity-90 object-contain" 
-            />
-        </nav>
-
-        {/* 4. NÚT BẤM BA GẠCH (HAMBURGER): Chỉ xuất hiện trên Điện thoại và Máy tính bảng (lg:hidden) */}
-        <button 
-            id="menu-toggle" 
-            className="lg:hidden p-2 text-slate-600 hover:text-blue-900 focus:outline-none z-50 flex items-center justify-center"
-            onClick={() => {
-                const mobileMenu = document.getElementById('mobile-menu');
-                const menuIcon = document.getElementById('menu-icon');
-                const closeIcon = document.getElementById('close-icon');
-                mobileMenu.classList.toggle('hidden');
-                menuIcon.classList.toggle('hidden');
-                closeIcon.classList.toggle('hidden');
-            }}
-        >
-            {/* Icon 3 gạch mở menu */}
-            <svg id="menu-icon" className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-            {/* Icon chữ X đóng menu */}
-            <svg id="close-icon" className="w-8 h-8 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-
-    </div>
-
-    {/* 5. MENU THẢ XUỐNG TRÊN ĐIỆN THOẠI: Hiển thị đầy đủ tất cả tính năng khi được kích hoạt */}
-    <div id="mobile-menu" className="hidden lg:hidden bg-white border-t border-slate-100 px-6 py-6 shadow-xl absolute w-full left-0 z-40 transition-all duration-300">
-        <div className="flex flex-col space-y-4 text-[16px] font-black uppercase tracking-wider">
-            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-slate-600 hover:text-blue-600 py-2 border-b border-slate-50">Home</a>
-            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-blue-600 py-2 border-b border-slate-50">Service</a>
-            
-            {/* Nút Quote trên điện thoại */}
-            <button onClick={() => handleNavigate('quote')} className="w-full bg-red-600 text-white py-3 rounded-xl hover:bg-red-700 shadow-lg text-center uppercase text-[12px] font-black tracking-widest mt-2">
-                Request Quote
-            </button>
-
-            {/* Logo Chứng chỉ hiển thị gọn gàng dưới cùng của menu di động */}
-            <div className="pt-4 border-t border-slate-100 flex items-center justify-center bg-slate-50 rounded-xl p-3 mt-2">
-                <img src="NQA.jpg" alt="AS9100 Certified" className="h-[90px] w-auto opacity-90 object-contain" />
-            </div>
-        </div>
-    </div>
-</header>
-
+                        <div className="bg-[#0f172a] text-white text-[10px] md:text-[11px] py-2 px-6 flex justify-between items-center font-bold uppercase tracking-widest">
+                            <div className="flex gap-4 md:gap-6">
+                                <span className="flex items-center gap-2 shrink-0 tracking-widest leading-none">TEL: +84 274 3768 492</span>
+                                <span className="hidden md:flex items-center gap-2 tracking-widest leading-none uppercase">sales@agsvn.com</span>
+                            </div>
+                            <div className="hidden lg:block italic text-blue-400 tracking-widest uppercase">"Your Satisfaction, Our Motto"</div>
+                        </div>
+                        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+                            <div className="logo-container">
+                                <button onClick={() => handleNavigate('home')} className="focus:outline-none hover:opacity-80 transition-opacity">
+                                    <img src="viber_image_2026-05-12_09-25-44-445.jpg" alt="AGS Precision Machining Logo" />
+                                    <img src="NQA AS9100 UK Logo.jpg" alt="nqa-as-9100"/>
+                                </button>
+                            </div>
+                            <nav className="hidden lg:flex items-center gap-10 text-[12px] font-black uppercase tracking-[0.15em] text-slate-600">
+                                <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="hover:text-blue-600 transition-colors uppercase">Home</a>
+                                <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-blue-600 border-b-2 border-blue-600 pb-1 uppercase font-black">Service</a>
+                                <a href="#" className="hover:text-blue-600 transition-colors uppercase">Capability</a>
+                                <a href="#" className="hover:text-blue-600 transition-colors uppercase">Industries</a>
+                                <button onClick={() => handleNavigate('quote')} className="bg-red-600 text-white px-7 py-3 rounded-xl hover:bg-red-700 shadow-xl shadow-red-100 transition-all uppercase text-[11px] font-black tracking-widest">Request Quote</button>
+                            </nav>
+                        </div>
+                    </header>
 
                     <main className="flex-grow">
                         {currentPage === 'home' && <MainListView onNavigate={handleNavigate} />}
@@ -539,7 +460,7 @@
                         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-16 mb-24 text-left">
                             <div className="space-y-8">
                                 <div className="logo-container">
-                                    <img src="viber_image_2026-05-12_09-25-44-445.jpg" alt="AGS Footer Logo" />
+                                    <img src="Screenshot 2026-03-23 131218.png" alt="AGS Footer Logo" />
                                 </div>
                                 <p className="text-[10px] text-slate-400 leading-relaxed uppercase font-black tracking-[0.3em]">Alliance Global Services Co., Ltd</p>
                                 <p className="text-sm text-slate-500 leading-relaxed font-medium text-justify">Leading precision machining and certified surface finishing facility based in Vietnam since 2005.</p>
@@ -547,8 +468,8 @@
                             <div>
                                 <h4 className="text-[11px] font-black uppercase tracking-[0.3em] text-blue-600 mb-8 uppercase">Services</h4>
                                 <ul className="text-[13px] space-y-4 text-slate-400 font-bold uppercase tracking-widest">
-                                    <li><a href="#" className="hover:text-blue-600 transition-colors uppercase tracking-widest">Anodizing</a></li>
-                                    <li><a href="#" className="hover:text-blue-600 transition-colors uppercase tracking-widest">Alodine</a></li>
+                                    <li><a href="#" className="hover:text-blue-600 transition-colors uppercase tracking-widest">CNC Machining</a></li>
+                                    <li><a href="#" className="hover:text-blue-600 transition-colors uppercase tracking-widest">Surface Finishing</a></li>
                                     <li><a href="#" className="hover:text-blue-600 transition-colors uppercase tracking-widest">UHV Cleaning</a></li>
                                 </ul>
                             </div>
@@ -568,7 +489,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div className="max-w-xl mx-auto border-t border-slate-100 pt-10 px-6 text-center text-[10px] font-black uppercase tracking-[0.4em] text-slate-300">
+                        <div className="max-w-7xl mx-auto border-t border-slate-100 pt-10 px-6 text-center text-[10px] font-black uppercase tracking-[0.4em] text-slate-300">
                             <span>© 2026 AGS Co., Ltd. All Rights Reserved.</span>
                         </div>
                     </footer>
