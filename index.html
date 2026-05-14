@@ -371,6 +371,39 @@
                         </div>
                     </div>
                 </div>
+                <section id="standards" className="bg-slate-900 text-white py-32 mt-32">
+                    <div className="max-w-6xl mx-auto px-6 text-center">
+                        <h2 className="text-4xl font-black mb-20 uppercase tracking-tighter">Surface Finishing Selection Guide</h2>
+                        <div className="overflow-x-auto rounded-[3rem] border border-white/10 shadow-2xl">
+                            <table className="w-full text-left text-sm">
+                                <thead>
+                                    <tr className="bg-white/5 text-[11px] uppercase font-black tracking-widest text-blue-400 border-b border-white/10">
+                                        <th className="p-8">Material Group</th>
+                                        <th className="p-8">Recommended Treatment</th>
+                                        <th className="p-8">Industry Compliance (Click for Quote)</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-white/5 font-bold uppercase tracking-tighter text-[12px]">
+                                    {[
+                                        ["Aluminum Alloys", "Anodizing, Alodining, Powder Coating", "MIL-PRF-8625 / MIL-DTL-5541"],
+                                        ["Stainless Steel", "Passivation, Electropolishing, Plating", "ASTM A967 / ASTM B912"],
+                                        ["Carbon & Alloy Steels", "Electroless Nickel, Plating, Powder Coating", "AMS 2404 / ASTM B733"],
+                                        ["Soft Metals (Brass, Copper)", "Plating (Nickel, Gold), Passivation", "ASTM B152 / ASTM B36"],
+                                        ["Titanium", "Anodizing, Passivation, Electropolishing", "AMS 2487 / AMS 2488"],
+                                        ["Kovar, Molybdenum", "Etching, Passivation, Electropolishing", "AMS 2487 / AMS 2488"],
+                                        ["Engineering Plastics", "Degreasing, Polishing, Painting", "RoHS / REACH / FDA"]
+                                    ].map((row, i) => (
+                                        <tr key={i} className="hover:bg-white/5 transition-colors group text-left">
+                                            <td className="p-8 text-white">{row[0]}</td>
+                                            <td className="p-8 text-slate-400">{row[1]}</td>
+                                            <td className="p-8 text-blue-400 cursor-pointer hover:underline group-hover:text-blue-300" onClick={() => onNavigate('quote')}>{row[2]}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
             );
             };  
         // --- Main Application ---
