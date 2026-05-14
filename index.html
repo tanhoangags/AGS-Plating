@@ -427,7 +427,24 @@
                 <div className="min-h-screen flex flex-col">
                     <header className="bg-white header-shadow sticky top-0 z-50">
                         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center gap-4">
-  {/* Logo 1 bên trái */}
+  <header className="bg-white header-shadow sticky top-0 z-50">
+    {/* Bar thông tin trên cùng */}
+    <div className="bg-gradient-to-r from-[#0f172a] to-blue-900 text-white text-[20px] md:text-[14px] py-3 px-6 flex justify-between items-center font-bold uppercase tracking-widest shadow-lg">
+        <div className="flex gap-4 md:gap-6 items-center">
+            <div className="flex items-center gap-2 shrink-0 tracking-widest leading-none hover:text-blue-300 transition-colors cursor-pointer">
+                <span>📞</span>
+                <span>+84 274 3768 492</span>
+            </div>
+            <div className="hidden md:flex items-center gap-2 tracking-widest leading-none hover:text-blue-300 transition-colors cursor-pointer">
+                <span>✉️</span>
+                <span>sales@agsvn.com</span>
+            </div>
+        </div>
+        <div className="hidden lg:flex italic text-blue-300 tracking-widest uppercase text-[14px] font-bold animate-pulse">✨ Your Satisfaction, Our Motto</div>
+    </div>
+
+</header>
+                          {/* Logo 1 bên trái */}
   <button onClick={() => handleNavigate('home')} className="focus:outline-none hover:opacity-80 transition-opacity shrink-0">
     <img src="viber_image_2026-05-12_09-25-44-445.jpg" alt="AGS Precision Machining Logo" className="h-12 w-auto" />
   </button>
