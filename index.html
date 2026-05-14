@@ -323,21 +323,12 @@
             );
         };
 
-        // --- View: Main ListView ---
-        const MainListView = ({ onNavigate }) => (
-            <div className="fade-in">
-                <div className="bg-slate-50 border-b border-slate-200 text-left">
-                    <div className="max-w-8xl mx-auto px-6 py-14">
-                        <nav className="flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">
-                            <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('home'); }} className="breadcrumb-item hover:text-blue-600 transition-colors">Home</a>
-                            <span className="breadcrumb-item text-slate-900 font-bold uppercase">Service</span>
-                        </nav>
-                        <h1 className="text-5xl font-black text-slate-900 tracking-tight uppercase leading-none">Finishing service</h1>
-                    </div>
-                </div>
-
-                <section className="max-w-7xl mx-auto px-6 py-20">
-                    
+        // --- MainListView Component (Updated with translations) ---
+        const MainListView = ({ onNavigate }) => {
+            const { t } = useLanguage();
+            
+            return (
+                <div className="fade-in">
                     <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50 py-20 border-b border-slate-100">
                         <div className="max-w-7xl mx-auto px-6 text-center">
                             <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tight leading-none mb-6 gradient-text scale-in">
@@ -348,64 +339,42 @@
                             </p>
                         </div>
                     </div>
-                </section>
 
-                <section className="max-w-8xl mx-auto px-6 py-12 text-left">
-                    <div className="grid md:grid-cols-2 gap-x-12 gap-y-24">
-                        {Object.keys(servicesData).map((key) => (
-                            <div key={key} className="service-card flex flex-col gap-8 cursor-pointer group" onClick={() => onNavigate(key)}>
-                                <div className="overflow-hidden rounded-[2rem] shadow-xl border border-slate-200 relative">
-                                    <img src={servicesData[key].image} alt={servicesData[key].title} />
-                                    <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/40 transition-all flex items-center justify-center text-center">
-                                        <div className="bg-white text-blue-900 px-8 py-4 rounded-full font-black uppercase text-[11px] tracking-[0.2em] opacity-0 group-hover:opacity-100 transform translate-y-6 group-hover:translate-y-0 transition-all shadow-xl">View Details & Specs</div>
+                    <div className="max-w-7xl mx-auto px-6 py-20">
+                        <div className="grid md:grid-cols-3 gap-8">
+                            {Object.keys(servicesData).map((key, index) => {
+                                const service = servicesData[key];
+                                return (
+                                    <div 
+                                        key={key} 
+                                        className="service-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-lg cursor-pointer group"
+                                        onClick={() => onNavigate(key)}
+                                        style={{ animationDelay: `${index * 0.1}s` }}
+                                    >
+                                        <div className="relative overflow-hidden">
+                                            <img src={service.image} alt={service.title} />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                        </div>
+                                        <div className="p-6">
+                                            <h3 className="text-2xl font-black uppercase tracking-tight text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">
+                                                {service.title}
+                                            </h3>
+                                            <p className="text-[14px] text-slate-500 leading-relaxed line-clamp-3">
+                                                {service.overview.substring(0, 150)}...
+                                            </p>
+                                            <div className="mt-6 flex items-center gap-2 text-blue-600 font-bold text-sm uppercase tracking-wider group-hover:gap-4 transition-all">
+                                                <span>Learn More</span>
+                                                <Icon name="arrow-right" size={18} />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="text-left px-4 md:px-0">
-                                    <h2 className="text-3xl font-black text-slate-900 mb-4 text-blue-700 underline decoration-blue-200 decoration-4 underline-offset-8 group-hover:text-blue-500 transition-colors uppercase tracking-tighter leading-tight">{servicesData[key].title}</h2>
-                                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6 italic">Spec: {servicesData[key].specs[0].value}</p>
-                                    <p className="text-sm leading-relaxed text-slate-600 line-clamp-3 text-justify">{servicesData[key].overview}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                <section id="standards" className="bg-slate-900 text-white py-32 mt-32">
-                    <div className="max-w-8xl mx-auto px-4 text-center">
-                        <h2 className="text-4xl font-black mb-20 uppercase tracking-tighter">Surface Finishing Selection Guide</h2>
-                        <div className="overflow-x-auto rounded-[3rem] border border-white/10 shadow-2xl">
-                            <table className="w-full text-left text-sm">
-                                <thead>
-                                    <tr className="bg-white/10 text-[22px] uppercase font-black tracking-widest text-blue-400 border-b border-white/10">
-                                        <th className="p-8">Material Group</th>
-                                        <th className="p-8">Recommended Treatment</th>
-                                        <th className="p-8">Industry Compliance</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-white/5 font-bold uppercase tracking-tighter text-[20px]">
-                                    {[
-                                        ["Aluminum Alloys", "Anodizing, Alodining, Powder Coating", "MIL-PRF-8625 / MIL-DTL-5541"],
-                                        ["Stainless Steel", "Passivation, Electropolishing, Plating", "ASTM A967 / ASTM B912"],
-                                        ["Carbon & Alloy Steels", "Electroless Nickel, Plating, Powder Coating", "AMS 2404 / ASTM B733"],
-                                        ["Soft Metals (Brass, Copper)", "Plating (Nickel, Gold), Passivation", "ASTM B152 / ASTM B36"],
-                                        ["Titanium", "Anodizing, Passivation, Electropolishing", "AMS 2487 / AMS 2488"],
-                                        ["Kovar, Molybdenum", "Etching, Passivation, Electropolishing", "AMS 2487 / AMS 2488"],
-                                        ["Engineering Plastics", "Degreasing, Polishing, Painting", "RoHS / REACH / FDA"]
-                                    ].map((row, i) => (
-                                        <tr key={i} className="hover:bg-white/5 transition-colors group text-left">
-                                            <td className="p-8 text-white">{row[0]}</td>
-                                            <td className="p-8 text-slate-400">{row[1]}</td>
-                                            <td className="p-8 text-blue-400 cursor-pointer hover:underline group-hover:text-blue-300" onClick={() => onNavigate('quote')}>{row[2]}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                );
+                            })}
                         </div>
                     </div>
-                </section>
-            </div>
-        );
-
+                </div>
+            );
+        };
         // --- Main Application ---
         const App = () => {
             const [currentPage, setCurrentPage] = useState('home');
