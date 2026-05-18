@@ -240,6 +240,104 @@
             }
         };
 
+        // --- Sub-Component: Selection Guide ---
+        const SelectionGuide = () => {
+            const guideData = [
+                {
+                    material: "ALUMINUM ALLOYS",
+                    treatment: "ANODIZING, ALODINING, POWDER COATING",
+                    compliance: "MIL-A-8625 / MIL-DTL-5541"
+                },
+                {
+                    material: "STAINLESS STEEL",
+                    treatment: "PASSIVATION, ELECTROPOLISHING, PLATING",
+                    compliance: "ASTM A967 / ASTM B912"
+                },
+                {
+                    material: "CARBON & ALLOY STEELS",
+                    treatment: "ELECTROLESS NICKEL, PLATING, POWDER COATING",
+                    compliance: "AMS-C-26074 / ASTM B733"
+                },
+                {
+                    material: "SOFT METALS (BRASS, COPPER)",
+                    treatment: "PLATING (NICKEL, GOLD), PASSIVATION",
+                    compliance: "ASTM B733 / ASTM B488"
+                },
+                {
+                    material: "TITANIUM",
+                    treatment: "ANODIZING, PASSIVATION, ELECTROPOLISHING",
+                    compliance: "AMS 2487 / AMS 2488"
+                },
+                {
+                    material: "KOVAR, MOLYBDENUM",
+                    treatment: "ETCHING, PASSIVATION, ELECTROPOLISHING",
+                    compliance: "AMS 2487 / AMS 2488"
+                },
+                {
+                    material: "ENGINEERING PLASTICS",
+                    treatment: "DEGREASING, POLISHING, PAINTING",
+                    compliance: "RoHS / REACH / FDA"
+                }
+            ];
+
+            return (
+                <section className="bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] py-24 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-grid opacity-5"></div>
+                    <div className="max-w-7xl mx-auto px-6 relative z-10">
+                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-white text-center mb-16">
+                            Surface Finishing Selection Guide
+                        </h2>
+                        
+                        <div className="bg-[#0a1628] rounded-3xl border border-blue-900/30 overflow-hidden shadow-2xl">
+                            {/* Table Header */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-0 bg-gradient-to-r from-blue-900/40 to-blue-800/40 p-6 md:p-8 border-b border-blue-800/50">
+                                <div className="text-blue-400 font-black uppercase tracking-widest text-xs md:text-sm">
+                                    Material Group
+                                </div>
+                                <div className="text-blue-400 font-black uppercase tracking-widest text-xs md:text-sm">
+                                    Recommended Treatment
+                                </div>
+                                <div className="text-blue-400 font-black uppercase tracking-widest text-xs md:text-sm">
+                                    Industry Compliance <span className="text-blue-300 text-[10px]">(Click for Quote)</span>
+                                </div>
+                            </div>
+                            
+                            {/* Table Rows */}
+                            <div className="divide-y divide-slate-700/50">
+                                {guideData.map((row, index) => (
+                                    <div 
+                                        key={index}
+                                        className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 p-6 md:p-8 hover:bg-blue-900/10 transition-all duration-300 cursor-pointer group"
+                                    >
+                                        <div className="text-white font-bold uppercase tracking-wide text-sm md:text-base group-hover:text-blue-400 transition-colors">
+                                            {row.material}
+                                        </div>
+                                        <div className="text-slate-300 text-sm md:text-base leading-relaxed">
+                                            {row.treatment}
+                                        </div>
+                                        <div className="text-blue-400 font-bold text-sm md:text-base hover:text-blue-300 transition-colors flex items-center gap-2">
+                                            {row.compliance}
+                                            <Icon name="external-link" size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <div className="text-center mt-12">
+                            <p className="text-blue-200 text-sm mb-6 max-w-3xl mx-auto leading-relaxed">
+                                Not sure which finishing process is right for your application? Our engineering team provides free technical consultations to help you select the optimal surface treatment.
+                            </p>
+                            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-black uppercase tracking-widest text-sm shadow-xl shadow-blue-900/50 transition-all hover:scale-105 flex items-center gap-3 mx-auto">
+                                Request Technical Consultation
+                                <Icon name="arrow-right" size={18} />
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
         // --- Sub-Component: Quote Form ---
         const QuoteForm = ({ title, onNavigate }) => (
             <div id="quote-section" className="bg-white p-10 rounded-[2.5rem] shadow-2xl border border-slate-100 mt-20 fade-in text-left">
@@ -473,6 +571,9 @@
                             })}
                         </div>
                     </div>
+                    
+                    {/* Selection Guide Section */}
+                    <SelectionGuide />
                 </div>
             );
         };  
