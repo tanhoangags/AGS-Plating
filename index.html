@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; scroll-behavior: smooth; }
         h1, h2, h3, h4 { font-family: 'Roboto', sans-serif; }
@@ -29,8 +30,57 @@
         .tech-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; }
         .logo-container img { height: 100px; width: auto; object-fit: contain; }
         .type-box { border: 1px solid #e2e8f0; padding: 14px; border-radius: 12px; margin-top: 10px; background-color: #ffffff; }
-
-
+        
+        /* Hero Section Styles */
+        .hero-gradient { 
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1e40af 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .cert-badge {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .cert-badge:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .hero-button-primary {
+            background: white;
+            color: #0f172a;
+            transition: all 0.3s ease;
+        }
+        .hero-button-primary:hover {
+            background: #f1f5f9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .hero-button-secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .hero-button-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 
@@ -45,6 +95,7 @@
             useEffect(() => { if (window.lucide) window.lucide.createIcons(); }, [name]);
             return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
         };
+        
         // --- Master Data ---
         const servicesData = {
             anodizing: {
@@ -160,9 +211,9 @@
             Deburring: {
                 title: "Bead Blasting",
                 image: "powder coating.jpg",
-                overview: "AGS delivers high-precision Bead Blasting services to elevate the quality, durability, and aesthetics of your components. Utilizing state-of-the-art equipment, we blast microscopic spherical glass beads at high pressure to clean and refine metal surfaces. Unlike harsh abrasives, this non-destructive method removes machining marks and imperfections without altering tight dimensional tolerances. The result is a flawless, uniform matte or satin finish that enhances fatigue resistance and serves as an ideal pre-treatment for anodizing or painting. Trusted across aerospace, medical, and electronics industries, AGS guarantees pristine, cleanroom-ready parts engineered to your exact specifications.",
+                overview: "AGS delivers high-precision Bead Blasting services to elevate the quality, durability, and aesthetics of your components. Utilizing state-of-the-art equipment, we blast microscopic spherical glass beads at high pressure to clean and refine metal surfaces. Unlike harsh abrasives, this non-destructive method removes machining marks and imperfections without altering tight dimensional tolerances. The result is a flawless, uniform matte or satin finish that enhances fatigue resistance and serves as an ideal pre-treatment for anodizing or painting. Trusted across aerospace, medical, and electronics industries, AGS guarantees pristine, cleanroom-ready parts engineered to your exact specifications.",
                 specs: [
-                    { label: "Finishes", value: "Grit Blasting, Bead Blasting, Vibratory Deburring "},
+                    { label: "Finishes", value: "Grit Blasting, Bead Blasting, Vibratory Deburring " },
                     { label: "Surface Finish", value: "Ra 0.8µm to 12µm (Media dependent)" },
                     { label: "Deburring Precision", value: "Edge radius 0.1mm to 2mm (Controllable)" },
                     { label: "Media Types", value: "Aluminum Oxide, Glass Bead" }
@@ -337,16 +388,71 @@
             );
         };
          
-        // --- MainListView Component
-       
+        // --- MainListView Component with Hero Section ---
         const MainListView = ({ onNavigate }) => {
             return (
                 <div className="fade-in">
+                    {/* Hero Section */}
+                    <section className="hero-gradient text-white py-24 md:py-32 relative">
+                        <div className="max-w-7xl mx-auto px-6 relative z-10">
+                            <div className="max-w-4xl">
+                                {/* Main Heading */}
+                                <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tight leading-none mb-6">
+                                    Advanced Surface Finishing Solutions
+                                </h1>
+                                
+                                {/* Subtitle */}
+                                <p className="text-xl md:text-2xl text-blue-100 mb-12 font-medium leading-relaxed">
+                                    Advanced surface treatment solutions for aerospace and defense industries
+                                </p>
+                                
+                                {/* Certification Badges */}
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+                                    <div className="cert-badge rounded-2xl px-6 py-4 flex items-center gap-3">
+                                        <Icon name="check-circle-2" size={20} className="text-green-400 shrink-0" />
+                                        <span className="text-sm font-bold uppercase tracking-wider">AS9100D Certified</span>
+                                    </div>
+                                    <div className="cert-badge rounded-2xl px-6 py-4 flex items-center gap-3">
+                                        <Icon name="check-circle-2" size={20} className="text-green-400 shrink-0" />
+                                        <span className="text-sm font-bold uppercase tracking-wider">AMS Compliant</span>
+                                    </div>
+                                    <div className="cert-badge rounded-2xl px-6 py-4 flex items-center gap-3">
+                                        <Icon name="check-circle-2" size={20} className="text-green-400 shrink-0" />
+                                        <span className="text-sm font-bold uppercase tracking-wider">MIL-SPEC Standards</span>
+                                    </div>
+                                    <div className="cert-badge rounded-2xl px-6 py-4 flex items-center gap-3">
+                                        <Icon name="check-circle-2" size={20} className="text-green-400 shrink-0" />
+                                        <span className="text-sm font-bold uppercase tracking-wider">ASTM Certified</span>
+                                    </div>
+                                </div>
+                                
+                                {/* CTA Buttons */}
+                                <div className="flex flex-col sm:flex-row gap-4">
+                                    <button 
+                                        onClick={() => onNavigate('quote')}
+                                        className="hero-button-primary px-8 py-5 rounded-2xl font-bold uppercase tracking-wider text-base shadow-xl flex items-center justify-center gap-3"
+                                    >
+                                        Request Quote
+                                        <Icon name="arrow-right" size={20} />
+                                    </button>
+                                    <button 
+                                        onClick={() => window.scrollTo({ top: 600, behavior: 'smooth' })}
+                                        className="hero-button-secondary px-8 py-5 rounded-2xl font-bold uppercase tracking-wider text-base flex items-center justify-center gap-3"
+                                    >
+                                        Explore Services
+                                        <Icon name="chevron-down" size={20} />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Services Section */}
                     <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50 py-20 border-b border-slate-100">
                         <div className="max-w-7xl mx-auto px-6 text-center">
-                            <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tight leading-none mb-6 gradient-text scale-in">
-                                Our Finishing Capabilities
-                            </h1>
+                            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-none mb-6">
+                                Surface Treatment Services
+                            </h2>
                             <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-medium">
                                We offer a comprehensive range of finishing solutions through qualified in-house processes and certified partner networks.
                             </p>
@@ -387,7 +493,8 @@
                     </div>
                 </div>
             );
-            };  
+        };  
+        
         // --- Main Application ---
         const App = () => {
             const [currentPage, setCurrentPage] = useState('home');
@@ -413,100 +520,91 @@
 
             return (
                 <div className="min-h-screen flex flex-col">
-                    <header className="bg-white header-shadow sticky top-0 z-50">
-    {/* Bar thông tin trên cùng */}
-    <div className="bg-gradient-to-r from-[#0f172a] to-blue-900 text-white text-[20px] md:text-[14px] py-3 px-6 flex justify-between items-center font-bold uppercase tracking-widest shadow-lg">
-        <div className="flex gap-4 md:gap-6 items-center">
-            <div className="flex items-center gap-2 shrink-0 tracking-widest leading-none hover:text-blue-300 transition-colors cursor-pointer">
-                <span>📞</span>
-                <span>+84 274 3768 492</span>
-            </div>
-            <div className="hidden md:flex items-center gap-2 tracking-widest leading-none hover:text-blue-300 transition-colors cursor-pointer">
-                <span>✉️</span>
-                <span>sales@agsvn.com</span>
-            </div>
-        </div>
-        <div className="hidden lg:flex italic text-blue-300 tracking-widest uppercase text-[14px] font-bold animate-pulse">✨ Your Satisfaction, Our Motto</div>
-    </div>
+                    {/* Top Info Bar */}
+                    <div className="bg-gradient-to-r from-[#0f172a] to-blue-900 text-white text-[20px] md:text-[14px] py-3 px-6 flex justify-between items-center font-bold uppercase tracking-widest shadow-lg">
+                        <div className="flex gap-4 md:gap-6 items-center">
+                            <div className="flex items-center gap-2 shrink-0 tracking-widest leading-none hover:text-blue-300 transition-colors cursor-pointer">
+                                <span>📞</span>
+                                <span>+84 274 3768 492</span>
+                            </div>
+                            <div className="hidden md:flex items-center gap-2 tracking-widest leading-none hover:text-blue-300 transition-colors cursor-pointer">
+                                <span>✉️</span>
+                                <span>sales@agsvn.com</span>
+                            </div>
+                        </div>
+                        <div className="hidden lg:flex italic text-blue-300 tracking-widest uppercase text-[14px] font-bold animate-pulse">✨ Your Satisfaction, Our Motto</div>
+                    </div>
 
-</header>
+                    {/* Main Header */}
+                    <header className="bg-white shadow-sm sticky top-0 z-40">
+                        <div className="max-w-8xl mx-auto px-4 md:px-8 py-3 md:py-4 flex justify-between items-center">
+                            {/* Logo */}
+                            <div className="logo-container">
+                                <button onClick={() => handleNavigate('home')} className="focus:outline-none hover:opacity-80 transition-opacity flex items-center">
+                                    <img 
+                                        src="viber_image_2026-05-12_09-25-44-445.jpg" 
+                                        alt="Logo AGS" 
+                                        className="h-[65px] md:h-[150px] w-auto object-contain transition-all duration-300" 
+                                    />
+                                </button>
+                            </div>
 
-    <header class="bg-white shadow-sm sticky top-0 z-40">
-    <div className="max-w-8xl mx-auto px-4 md:px-8 py-3 md:py-4 flex justify-between items-center">
-        
-        {/* 1. Phần bên trái: Khối chứa Logo chính (Tự co giãn kích thước linh hoạt) */}
-        <div className="logo-container">
-            <button onClick={() => handleNavigate('home')} className="focus:outline-none hover:opacity-80 transition-opacity flex items-center">
-                <img 
-                    src="viber_image_2026-05-12_09-25-44-445.jpg" 
-                    alt="Logo AGS" 
-                    className="h-[65px] md:h-[150px] w-auto object-contain transition-all duration-300" 
-                />
-            </button>
-        </div>
+                            {/* Desktop Navigation */}
+                            <nav className="hidden lg:flex items-center gap-8 xl:gap-10 text-[18px] xl:text-[20px] font-black uppercase tracking-[0.15em] text-slate-600">
+                                <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="hover:text-blue-600 transition-colors uppercase">Home</a>
+                                <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-blue-600 border-b-2 border-blue-600 pb-1 uppercase font-black">Service</a>
+                                
+                                <button onClick={() => handleNavigate('quote')} className="bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 shadow-xl shadow-red-100 transition-all uppercase text-[11px] font-black tracking-widest whitespace-nowrap">
+                                    Request Quote
+                                </button>
 
-        {/* 2. Phần bên phải: Chứa Menu, Nút Quote và Logo chứng chỉ (Chỉ hiện trên PC từ màn hình lg trở lên) */}
-        <nav className="hidden lg:flex items-center gap-8 xl:gap-10 text-[18px] xl:text-[20px] font-black uppercase tracking-[0.15em] text-slate-600">
-            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="hover:text-blue-600 transition-colors uppercase">Home</a>
-            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-blue-600 border-b-2 border-blue-600 pb-1 uppercase font-black">Service</a>
-            
-            {/* Nút Request Quote */}
-            <button onClick={() => handleNavigate('quote')} className="bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 shadow-xl shadow-red-100 transition-all uppercase text-[11px] font-black tracking-widest whitespace-nowrap">
-                Request Quote
-            </button>
+                                <div className="h-8 w-[1px] bg-slate-200"></div>
 
-            {/* Vạch ngăn cách dọc */}
-            <div className="h-8 w-[1px] bg-slate-200"></div>
+                                <a href="https://www.nqa.com/en-gb/certification/standards/as9100">
+                                    <img src="https://www.nqa.com/medialibraries/NQA/NQA-Media-Library/CertificationLogos/Logos%20(with%20Accreditation)/NQA-AS9100-UK-Logo-UKAS.jpg" alt="nqa-as9100-ukas" className="h-16 w-auto"/>
+                                </a>
+                            </nav>
 
-            {/* 3. Logo thứ 2 nằm ở vị trí sau cùng bên phải */}
-           <a href=" https://www.nqa.com/en-gb/certification/standards/as9100"> <img src="https://www.nqa.com/medialibraries/NQA/NQA-Media-Library/CertificationLogos/Logos%20(with%20Accreditation)/NQA-AS9100-UK-Logo-UKAS.jpg" alt="nqa-as9100-ukas"/></a>
+                            {/* Mobile Menu Toggle */}
+                            <button 
+                                id="menu-toggle" 
+                                className="lg:hidden p-2 text-slate-600 hover:text-blue-900 focus:outline-none z-50 flex items-center justify-center"
+                                onClick={() => {
+                                    const mobileMenu = document.getElementById('mobile-menu');
+                                    const menuIcon = document.getElementById('menu-icon');
+                                    const closeIcon = document.getElementById('close-icon');
+                                    mobileMenu.classList.toggle('hidden');
+                                    menuIcon.classList.toggle('hidden');
+                                    closeIcon.classList.toggle('hidden');
+                                }}
+                            >
+                                <svg id="menu-icon" className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                </svg>
+                                <svg id="close-icon" className="w-8 h-8 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
 
-        </nav>
+                        {/* Mobile Menu */}
+                        <div id="mobile-menu" className="hidden lg:hidden bg-white border-t border-slate-100 px-6 py-6 shadow-xl absolute w-full left-0 z-40 transition-all duration-300">
+                            <div className="flex flex-col space-y-4 text-[16px] font-black uppercase tracking-wider">
+                                <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-slate-600 hover:text-blue-600 py-2 border-b border-slate-50">Home</a>
+                                <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-blue-600 py-2 border-b border-slate-50">Service</a>
+                                
+                                <button onClick={() => handleNavigate('quote')} className="w-full bg-red-600 text-white py-3 rounded-xl hover:bg-red-700 shadow-lg text-center uppercase text-[12px] font-black tracking-widest mt-2">
+                                    Request Quote
+                                </button>
 
-        {/* 4. NÚT BẤM BA GẠCH (HAMBURGER): Chỉ xuất hiện trên Điện thoại và Máy tính bảng (lg:hidden) */}
-        <button 
-            id="menu-toggle" 
-            className="lg:hidden p-2 text-slate-600 hover:text-blue-900 focus:outline-none z-50 flex items-center justify-center"
-            onClick={() => {
-                const mobileMenu = document.getElementById('mobile-menu');
-                const menuIcon = document.getElementById('menu-icon');
-                const closeIcon = document.getElementById('close-icon');
-                mobileMenu.classList.toggle('hidden');
-                menuIcon.classList.toggle('hidden');
-                closeIcon.classList.toggle('hidden');
-            }}
-        >
-            {/* Icon 3 gạch mở menu */}
-            <svg id="menu-icon" className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-            {/* Icon chữ X đóng menu */}
-            <svg id="close-icon" className="w-8 h-8 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-
-    </div>
-
-    {/* 5. MENU THẢ XUỐNG TRÊN ĐIỆN THOẠI: Hiển thị đầy đủ tất cả tính năng khi được kích hoạt */}
-    <div id="mobile-menu" className="hidden lg:hidden bg-white border-t border-slate-100 px-6 py-6 shadow-xl absolute w-full left-0 z-40 transition-all duration-300">
-        <div className="flex flex-col space-y-4 text-[16px] font-black uppercase tracking-wider">
-            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-slate-600 hover:text-blue-600 py-2 border-b border-slate-50">Home</a>
-            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="text-blue-600 py-2 border-b border-slate-50">Service</a>
-            
-            {/* Nút Quote trên điện thoại */}
-            <button onClick={() => handleNavigate('quote')} className="w-full bg-red-600 text-white py-3 rounded-xl hover:bg-red-700 shadow-lg text-center uppercase text-[12px] font-black tracking-widest mt-2">
-                Request Quote
-            </button>
-
-            {/* Logo Chứng chỉ hiển thị gọn gàng dưới cùng của menu di động */}
-            <div className="pt-4 border-t border-slate-100 flex items-center justify-center bg-slate-50 rounded-xl p-3 mt-2">
-<a href=" https://www.nqa.com/en-gb/certification/standards/as9100"> <img src="https://www.nqa.com/medialibraries/NQA/NQA-Media-Library/CertificationLogos/NQA-AS9100-UK-Logo.jpg" alt="nqa-as-9100" className="h-[150px] w-auto opacity-90 object-contain"/></a>
-            </div>
-        </div>
-    </div>
-</header>
-
+                                <div className="pt-4 border-t border-slate-100 flex items-center justify-center bg-slate-50 rounded-xl p-3 mt-2">
+                                    <a href="https://www.nqa.com/en-gb/certification/standards/as9100">
+                                        <img src="https://www.nqa.com/medialibraries/NQA/NQA-Media-Library/CertificationLogos/NQA-AS9100-UK-Logo.jpg" alt="nqa-as-9100" className="h-[150px] w-auto opacity-90 object-contain"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
 
                     <main className="flex-grow">
                         {currentPage === 'home' && <MainListView onNavigate={handleNavigate} />}
@@ -514,6 +612,7 @@
                         {servicesData[currentPage] && <DetailView id={currentPage} onNavigate={handleNavigate} />}
                     </main>
 
+                    {/* Footer */}
                     <footer className="bg-white border-t border-slate-200 pt-24 pb-12">
                         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-16 mb-24 text-left">
                             <div className="space-y-8">
@@ -558,8 +657,9 @@
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
- <script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="PXgR4UMNE4iIc4CnmR7tC";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>   
+    
+    <script>
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="PXgR4UMNE4iIc4CnmR7tC";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    </script>   
 </body>
 </html>
